@@ -1,0 +1,739 @@
+/*
+Theme Name: Bridge Child
+Description: This is a child theme for the Bridge WordPress Theme. Theme modifications should be done here instead of the parent theme.
+Version: 1.0
+Author: FreshWeb Studio
+Author URI: http://www.freshwebstudio.com
+Template: bridge
+*/
+
+/*
+ * Table of Contents:
+ *   o Override default styles from parent stylesheet
+ *   o Global styles
+ *   o Global plugin styling
+ *   o Global page styling
+ *   o Specific page styling
+ *   o Media Queries
+ */
+
+/************************************************
+ * Override default styles from parent stylesheet
+ ************************************************/
+/* Change vertical margins from default 0px. The theme doesn't provide options
+   for configurating this. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child,
+h6:last-child {
+    margin: 0.6em 0;
+}
+
+/************************************************
+ * Global styles
+ ************************************************/
+/* Add shadows on images, if desired. */
+.child-image-shadow {
+    -webkit-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    -moz-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+}
+
+/* Useful for adhoc indenting levels */
+.child-indent-1 {
+    margin-left: 1.3em;
+}
+
+/************************************************
+ * Global plugin styling
+ ************************************************/
+/**************
+ * Plugin: Popup Press
+ * Welcome Popup (only for demo site)
+ **************/
+/* Style the background */
+#popuppress-944 .pps-wrap {
+    background-color: #f7f7f7;
+}
+#popuppress-944 img:first-child {
+    margin-top: 0;
+}
+
+/* Let's remove the "I Disagree" cancellation button */
+#popuppress-944 #pps-btn-disagree {
+    display: none;
+}
+/* Change the "I Agree" button styling to match our theme */
+#popuppress-944 #pps-btn-agree {
+    border: 1px solid #61bf4c;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background-color: #61bf4c;
+    font-weight: 600;
+    margin-right: 0;
+}
+#popuppress-944 #pps-btn-agree:hover {
+    background-color: #8cd756;
+    border: 1px solid #8cd756;
+}
+/* Remove the checkmark icon to the left */
+#popuppress-944 #pps-btn-agree::before {
+    display: none;
+}
+
+/*
+ * Plugin: Pullout Widgets
+ * Pullout on right side of page (only for demo site)
+ */
+#pullouts .pullout-button span {
+    font-weight: 600;
+}
+
+/**************
+ * Plugin: AccessPress Social Icons
+ **************/
+/* The tooltip for the social icons need to be enlarged. */
+.aps-each-icon .aps-icon-tooltip {
+    font-size: 14px;
+}
+
+/**************
+ * Plugin: Gravity Forms
+ **************/
+.gform_wrapper {
+    margin-bottom: 0 !important;
+}
+.gform_wrapper .top_label label.gfield_label {
+    padding-bottom: 0;
+}
+form input[type="text"],
+form input[type="email"],
+form textarea,
+form select {
+    border: 1px solid #999 !important;
+    font-size: 14px !important;
+    color: #464646 !important;
+}
+body .gform_wrapper {
+    max-width: 100%;
+}
+/* Remove the top spacing above the Submit button. */
+.gform_wrapper .gform_footer {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Style Submit button to match theme colors. */
+body .gform_wrapper input[type="submit"] {
+    color: #61bf4c !important;
+    border: 1px solid #61bf4c !important;
+}
+body .gform_wrapper input[type="submit"]:hover {
+    color: #fff !important;
+    border: 1px solid #8cd756 !important;
+    background-color: #8cd756 !important;
+}
+
+/**************
+ * Plugin: Shortcodes Ultimate
+ **************/
+/*
+ * Accordion Effect for All Pages
+ */
+.su-spoiler.child-spoiler {
+    border: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #f7f7f7;
+    color: #464646;
+}
+.su-spoiler.child-spoiler .su-spoiler-title {
+    border-bottom: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #f7f7f7;
+}
+.su-spoiler.child-spoiler .su-spoiler-title .su-spoiler-icon,
+.su-spoiler.su-spoiler-closed.child-spoiler.su-spoiler-title .su-spoiler-icon {
+    left: 3px;
+    background-color: #f7f7f7;
+}
+.su-spoiler.child-spoiler .su-spoiler-content {
+    background-color: #f7f7f7;
+    padding: 1em;
+}
+
+/**************
+ * Plugin: Dropcaps
+ **************/
+/* Decrease font size. */
+.wpsdc-drop-cap {
+    padding: 0.3em 0.07em 0.25em 0 !important;
+    font-size: 3.8em !important;
+}
+
+/************************************************
+ * Global page styling
+ ************************************************/
+/**************
+ * Mobile menu
+ **************/
+/* For those menu options that contain sub-menus, change the cursor from an 'I' to an arrow. */
+nav.mobile_menu ul li.has_sub h3 {
+    cursor: default;
+}
+
+/**************
+ * Header
+ **************/
+/*
+ * Page header banner with foreground image.
+ * These are heading banners that contain only an image.
+ */
+.child-page-foreground-image-header {
+    -webkit-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    -moz-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+}
+.child-page-foreground-image-header .vc_single_image-wrapper,
+.child-page-foreground-image-header .vc_single_image-wrapper .vc_single_image-img {
+    width: 100%;
+}
+
+/* 
+ * Page header
+ * These are heading banners that have a background image with headings overlayed on them.
+ */
+/* Adding this class will insert the header background image. You can manually do the
+ * same thing by inserting an image in Visual Composer. */
+.child-page-header-background {
+    background-image: url("/wp-content/uploads/header-placeholder-sample-1.1732x500.jpg");
+}
+
+.child-page-header {
+    -webkit-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    -moz-box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+    box-shadow: 0px 3px 7px 1px rgba(170,170,170,1);
+}
+.child-page-header .vc_column_container {
+    padding-top: 155px;
+    padding-bottom: 155px;
+}
+.child-page-header h2 { /* default */
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    margin: 0 !important;
+    color: #fff;
+    text-transform: none;
+}
+.child-page-header h3 { /* default */
+    padding-top: 15px;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 41px;
+    margin: 0 !important;
+    color: #fff;
+    text-transform: none;
+}
+.child-page-header.light-text h2,
+.child-page-header.light-text h3 {
+    color: #fff;
+}
+.child-page-header.dark-text h2,
+.child-page-header.dark-text h3 {
+    color: #000;
+}
+.child-page-header.thick-text h2,
+.child-page-header.thick-text h3 {
+    font-weight: 900;
+}
+.child-page-header.thin-shadow-light-text h2,
+.child-page-header.thin-shadow-light-text h3 {
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+}
+.child-page-header.thick-shadow-light-text h2,
+.child-page-header.thick-shadow-light-text h3 {
+    text-shadow: 2px 2px 3px #000;
+}
+.child-page-header.stroke-light-text h2,
+.child-page-header.stroke-light-text h3 {
+    -webkit-text-fill-color: #fff;
+    -webkit-text-stroke-color: #666;
+    -webkit-text-stroke-width: 1px;
+    text-fill-color: #fff;
+    text-stroke-color: #666;
+    text-stroke-width: 1px;
+}
+
+/**************
+ * Footer
+ **************/
+/*
+ * Top footer
+ */
+.footer_top_holder {
+    background-size: inherit !important;
+    background-repeat: repeat !important;
+}
+/* The top footer container margins are too large. */
+.footer_top_holder .footer_top {
+    padding: 50px 0;
+}
+/* Let's brighten the default footer colors */
+.footer_top_holder .footer_top p,
+.footer_top_holder .footer_top span, 
+.footer_top_holder .footer_top li, 
+.footer_top_holder .footer_top .textwidget {
+    color: #f2f2f2;
+    font-weight: 600;
+}
+
+/* Why are the top footer widget headings so small? */
+.footer_top_holder .footer_top h5 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+/* Why are the top footer widget headings so small? */
+.footer_top_holder .footer_top h6 {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+/*
+ * Top Footer Widget 1: Contact information
+ */
+.footer_top_holder .footer_top .child-footer-contact table td {
+    text-align: left;
+    padding: 0 5px 0 0;
+}
+.footer_top_holder .footer_top .child-footer-contact table {
+    margin-top: 15px;
+}
+
+/* 
+ * Top Footer Widget 2: Contact form
+ */
+/* Remove the labels for sake of space. We'll use placeholder text instead. */
+.footer_top_holder .footer_top .child-footer-contact-form .gfield_label {
+    display: none;
+}
+/* Make the input fields smaller to fit the footer */
+.footer_top_holder .footer_top .child-footer-contact-form input[type="text"],
+.footer_top_holder .footer_top .child-footer-contact-form textarea {
+    padding: 5px;
+    color: #464646;
+    background-color: #f7f7f7;
+    font-weight: 600;
+    font-size: 14px;
+}
+/* Our textarea is too tall */
+.footer_top_holder .footer_top .child-footer-contact-form textarea.large {
+    height: 8em;
+}
+/* Let's remove any spacing surrounding the "send" button */
+.footer_top_holder .footer_top .child-footer-contact-form .gform_footer {
+    padding: 0;
+}
+/* Minimize the spacing between input fields */
+.footer_top_holder .footer_top .child-footer-contact-form .gform_fields li.gfield {
+    margin: 0 0 17px;
+}
+
+/*
+ * Top Footer Widget 3: Service Times
+ */
+.footer_top_holder .footer_top .child-footer-service-times table td {
+    text-align: left;
+    padding: 0 5px 0 0;
+}
+/* Let's pack-in everything tight for sake of space. */
+.footer_top_holder .footer_top .child-footer-service-times p {
+    line-height: 20px;
+}
+/* Give the headings some space */
+.footer_top_holder .footer_top .child-footer-service-times h6 {
+    margin: 10px 0 3px;
+}
+
+/*
+ * Bottom footer
+ */
+.footer_bottom_holder {
+    padding: 10px 0;
+}
+.footer_bottom p {
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+}
+.footer_bottom p a {
+    color: #61bf4c !important;
+}
+
+/************************************************
+ * Specific page styling
+ ************************************************/
+/**************
+ * Home page
+ **************/
+/* Meet the Pastor banner */
+div.child-home-meet-the-pastor {
+    background-position: top center !important;
+}
+div.child-home-meet-the-pastor h2 {
+    margin: 0.1em;
+} 
+
+/*
+ * Event section
+ * EventOn Plugin: Event Listings Addon
+ */
+/* Remove:
+ * 1. the space saved for the calendar header, and
+ * 2. the "loadbar" section above the calendar */
+.ajde_evcal_calendar.evoEL .calendar_header,
+.ajde_evcal_calendar.evoEL #eventon_loadbar_section {
+    display: none;
+}
+/* Move the text block to the right a bit for easy reading. */
+.child-coming-events-listing .eventon_events_list .eventon_list_event .hasFtIMG .evcal_desc,
+.child-coming-events-listing #evcal_list .eventon_list_event a.sin_val.hasFtIMG .evcal_desc {
+    padding-left: 130px;
+}
+
+/*
+ * Latest News section
+ */
+/* Let's make the headings look similar to the "Coming Events" block */
+.child-latest-news-listing h5 a {
+    color: #6B6B6B;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+/* Bring the date up tighter against previous paragraph */
+.child-latest-news-listing p.excerpt {
+    margin: 0 !important;
+}
+
+/*
+ * Common to both Event section and News section
+ */
+/* Style links next to headings */
+.child-latest-news-listing h3 a,
+.child-coming-events-listing h3 a {
+    font-size: 14px;
+    text-transform: none;
+    color: #61bf4c;
+}
+
+/**************
+ * About: Leadership Team page
+ **************/
+/* Space the leader's name, title, phone, etc. */
+.child-leadership-page-leader-heading h4,
+.child-leadership-page-leader-heading h5,
+.child-leadership-page-leader-heading p {
+    margin: 0.3em 0;
+}
+
+/**************
+ * About: Service Times page
+ **************/
+/* Style Sidebar: Our Location */
+.child-service-times-page-main-content table td {
+    text-align: left;
+    padding: 0 5px 0 0;
+}
+
+/**************
+ * Events page
+ **************/
+/*
+ * EventON Plugin
+ */
+ /* Change left border on EventTop to our theme color of green */
+.ajde_evcal_calendar .evcal_list_a {
+    border-color: #61bf4c !important;
+}
+/* Remove border around the "Type your addresss to get directions" input */
+.ajde_evcal_calendar .getdirections form input[type="text"] {
+    border: none !important;
+}
+/* Remove heavy shadow effect at bottom of EventCard */
+.ajde_evcal_calendar .getdirections {
+    border-bottom: none !important;
+}
+/* Let's enlarge the font of the event details */
+.ajde_evcal_calendar .eventon_desc_in p {
+    font-size: 14px !important;
+    line-height: 26px !important;
+}
+/* Make the "more" link darker */
+.ajde_evcal_calendar p.eventon_shad_p {
+    opacity: 1.0 !important;
+}
+/* Give some vertical space between months */
+.ajde_evcal_calendar .evcal_month_line p {
+    padding: 20px 0 10px !important;
+}
+/* Make the event listing's subtitle lowercase */
+.ajde_evcal_calendar .eventon_events_list .eventon_list_event .evcal_desc span.evcal_event_subtitle,
+.ajde_evcal_calendar .evo_pop_body .evcal_desc span.evcal_event_subtitle {
+    text-transform: none;
+}
+/* Let's remove the background gradient on the "more" link so it's readable. */
+.ajde_evcal_calendar .evcal_event_details .evcal_evdata_cell .eventon_details_shading_bot {
+    background: #eaeaea; 
+    height: 19px;
+    padding-top: 5px;
+}
+
+/**************
+ * Sermons: Portfolio list page
+ **************/
+/* Portfolio list */
+.projects_holder_outer .filter_outer {
+    margin-bottom: 25px;
+}
+.projects_holder_outer ul li span {
+    font-size: 16px;
+}
+.projects_holder article .portfolio_description {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+.projects_holder article .portfolio_description .portfolio_title {
+    margin: 0 !important;
+}
+.projects_holder article .published_date,
+.projects_holder article .portfolio_excerpt {
+    line-height: 22px;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #464646;
+}
+.projects_holder article .published_date {
+    text-align: center;
+}
+.projects_holder article .portfolio_excerpt {
+    text-align: left;
+}
+
+/**************
+ * Sermons: Individual portfolio page
+ **************/
+.child-message-row-content .child-message-date {
+    line-height: 21px;
+}
+.child-message-row-content p.child-message-description,
+.child-message-row-content p.child-message-description:last-child {
+    margin: 10px 0;
+}
+
+/**************
+ * News: Listing page
+ **************/
+/* Remove the white background behind blog text  */
+.blog_holder article .post_text .post_text_inner {
+    background-color: transparent !important;
+}
+/* Remove the spacing above the article heading */
+.blog .blog_holder.blog_small_image article .post_text .post_text_inner {
+    padding-top: 0 !important;
+}
+/* Remove default vertical spacing between article title, date, and excerpt */
+.blog .blog_holder.blog_small_image article .post_text .post_text_inner h2,
+.blog .blog_holder.blog_small_image article .post_text .post_text_inner .post_info {
+    margin: 0;
+}
+
+/**************
+ * News: Single page
+ **************/
+/* Remove the Title from the top of the page. It's possible to disable this on a
+   page-per-page basis, but let's not make the administrator do this. */
+.single-post .title_outer {
+    display: none;
+}
+
+/* Provide some padding around the article content */
+.single-post .blog_holder article .post_text .post_text_inner {
+    margin-bottom: 65px;
+    padding: 23px;
+    background-color: #fff !important;
+}
+/* Remove default vertical spacing for article title */
+.single-post .blog_holder article .post_text .post_text_inner h2,
+.single-post .blog_holder article .post_text .post_text_inner .post_info {
+    margin: 0;
+}
+/* Override default large paragraph margins */
+.single-post .blog_single p {
+    margin: 1em 0;
+}
+/* For some reason, the visual composer row is adding a negative margin
+   negating the padding that we added above */
+.single-post .vc_row .section_inner_margin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* 
+ * Since we have a white header, we'll need to add a bottom border
+ * on blog pages */
+.blog header,
+.single header,
+.search header,
+.archive header,
+.category header,
+.error404 header {
+    border-bottom: 1px solid #ccc;
+}
+/* Give some vertical space under header for blog pages. */
+.blog .content,
+.single .content,
+.search .content,
+.archive .content,
+.category .content,
+.author .content,
+.error404 .content {
+    margin-top: 95px !important;
+}
+
+/**************
+ * Contact page
+ **************/
+/* Table styling */
+.child-contact-page table td {
+    text-align: left;
+}
+/* Reposition social icons tooltips. */
+.child-contact-page .aps-each-icon .aps-icon-tooltip-bottom {
+    left: 0;
+    margin-left: -6px !important;
+}
+.child-contact-page .aps-each-icon .aps-icon-tooltip-bottom:before  {
+    left: 19%;
+    margin-left: 0;
+}
+
+/* Gravity Form: Remove the spacing between the name fields and those below. */
+.child-contact-page-form ul li:first-child {
+    margin-bottom: 0 !important;
+}
+/* Gravity Form: The "0 of 5000 max characters" label is too small. */
+.child-contact-page-form .gform_wrapper div.charleft {
+    font-size: inherit;
+}
+
+/* Remove the margin on the bottom of the Contact Page google map. */
+.google_map_holder .google_map {
+    margin-bottom: 0;
+}
+
+/**************
+ * Giving page
+ **************/
+/* Giving Options boxes: Left align the image and title */
+.q_icon_with_title.small .icon_holder {
+    padding: 0 5px 0 0 !important;
+    margin-left: -11px;
+}
+/* Giving Options boxes: Vertically align the image and the title */
+.q_icon_with_title.small .icon_holder,
+.q_icon_with_title.small .icon_holder img {
+    height: 52px !important;
+}
+/* Style our giving section headings */
+.child-giving-page-options h2 {
+    text-transform: none;
+}
+/* Style separator line */
+.child-giving-page-separator {
+    border-top-color: #61bf4c !important;
+}
+/* Style separator heading */
+.child-giving-page-separator span {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+/**************
+ * Privacy Policy page
+ **************/
+/* Contact information */
+.child-sidebar-contact table td {
+    text-align: left;
+    padding: 0 5px 0 0;
+}
+.child-sidebar-contact table {
+    margin-top: 5px;
+}
+
+/**************
+ * 404 Error page
+ **************/
+body.error404 .title {
+    height: 175px !important;
+}
+body.error404 .title_subtitle_holder {
+    text-align: center;
+    margin-top: 95px;
+}
+
+/************************************************
+ * Media Queries
+ ************************************************/
+@media only screen and (min-width: 900px) {
+
+    /**************
+     * Events page
+     **************/
+    /* Show more of the thumbnail images in the event listings */
+    .child-events-listing-wide-image .ajde_evcal_calendar .eventon_events_list .eventon_list_event .ev_ftImg {
+        width: 250px;
+    }
+    /* Slide the date over to the right to accommodate the larger thumbnail image above */
+    .child-events-listing-wide-image .ajde_evcal_calendar .eventon_events_list .eventon_list_event .hasFtIMG .evcal_cblock, 
+    .child-events-listing-wide-image .ajde_evcal_calendar .evo_pop_body .hasFtIMG .evcal_cblock {
+        left: 260px;
+    }
+    /* Slide the text over to the right to accommodate the larger thumbnail image above */
+    .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event a.sin_val.hasFtIMG .evcal_desc, 
+    .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .sin_val.hasFtIMG .evcal_desc,
+    .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .hasFtIMG .evcal_desc,
+    .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .evo_pop_body .hasFtIMG .evcal_desc {
+        padding-left: 340px;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+    section.parallax_section_holder {
+        min-height: inherit !important;
+    }
+    
+}
+
