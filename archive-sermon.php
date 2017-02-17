@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Sermon Series
+ * 
  */
 
 // No direct access
@@ -11,11 +11,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function fw_child_sermon_header_banner_data( $data ) {
 
-    $data['subtitle'] = 'Browse by series';
+    $archive_dates = FW_Child_Common_Functions::get_month_archive_date_from_permalink();
+
+    $data['subtitle'] = ( ! empty( $archive_dates ) )
+        ? 'on ' . $archive_dates['month_name'] . ' ' . $archive_dates['year']
+        : 'Browse by date';
+
     return $data;
 
 }
 
+// Make query available via filter
 add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner_data' );
 
 ?>
@@ -37,10 +43,15 @@ add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner
             FW_Child_Common_Functions::wrap_template_part(
                  FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-navigation'
             );
- 
+
             // Display sermons.
             FW_Child_Common_Functions::wrap_template_part(
-                 FW_CHILD_THEME_PARTIALS_DIR . '/content-sermon-series'
+                 FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-loop'
+            );
+
+            // Display pagination.
+            FW_Child_Common_Functions::wrap_template_part(
+                 FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-pagination'
             );
 
             ?>
@@ -52,5 +63,3 @@ add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner
 </div>
 
 <?php get_footer(); ?>
-
-

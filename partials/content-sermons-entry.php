@@ -16,6 +16,7 @@ $excerpt = wptexturize( $excerpt );
 
 $date_format = get_option( 'date_format' );
 $date_string = get_the_date( $date_format );
+
 ?>
 
 <article class="fw-child-sermon-entry">
@@ -23,11 +24,9 @@ $date_string = get_the_date( $date_format );
     <?php if ( has_post_thumbnail() ) : ?>
 
         <header>
-
             <div class="fw-child-sermon-entry-image">
                 <a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail(); ?></a>
             </div>
-
         </header>
 
     <?php endif; ?>

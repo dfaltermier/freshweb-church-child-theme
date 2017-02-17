@@ -14,7 +14,7 @@ function fw_child_sermon_query() {
         'post_type' => 'sermon',
         'paged'     => FW_Child_Common_Functions::get_current_page_number()
     ) );
-    
+
 }
 
 /**

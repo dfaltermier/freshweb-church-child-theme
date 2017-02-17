@@ -12,8 +12,9 @@ $class    = $banner_data['class'];
 $title    = $banner_data['title'];
 $subtitle = $banner_data['subtitle'];
 
+// The below page header structure leverages the parent theme's use of html/styles
+// used on pages throughout site.
 ?>
-
 <div class="vc_row wpb_row section vc_row-fluid
             child-page-header <?php echo $class; ?>" style="text-align:center;">
     <div class="full_section_inner clearfix">

@@ -42,6 +42,23 @@ class FW_Child_Front_Functions {
                 FW_CHILD_THEME_VERSION
             );
 
+            // Add script to ensure our videos are displayed responsively at 100%.
+            wp_enqueue_script(
+                'fw-child-theme-fitvids-js', 
+                FW_CHILD_THEME_JS_URI . '/jquery.fitvids.js', 
+                array( 'jquery' ),
+                FW_CHILD_THEME_VERSION,
+                true
+            );
+
+            wp_enqueue_script(
+                'fw-child-theme-fitvids-configure-js', 
+                FW_CHILD_THEME_JS_URI . '/fitvids-configure.js', 
+                array( 'jquery' ),
+                FW_CHILD_THEME_VERSION,
+                true
+            );
+
         }
 
     }
@@ -61,6 +78,12 @@ class FW_Child_Front_Functions {
         // Sermon helper functions.
         locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-sermon-functions.php', true );
     
+        // Registers template_redirect for downloading files along with utility methods.
+        locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-download-functions.php', true );
+        $download = new FW_Child_Download_Functions();
+
+        // File utility methods.
+        locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-file-functions.php', true );
     }
 
 }

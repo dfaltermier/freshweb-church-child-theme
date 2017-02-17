@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Sermon Series
+ * 
  */
 
 // No direct access
@@ -11,11 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function fw_child_sermon_header_banner_data( $data ) {
 
-    $data['subtitle'] = 'Browse by series';
+    $data['subtitle'] = get_the_title();
     return $data;
 
 }
 
+// Make query available via filter
 add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner_data' );
 
 ?>
@@ -38,9 +39,9 @@ add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner
                  FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-navigation'
             );
  
-            // Display sermons.
+            // Display sermon.
             FW_Child_Common_Functions::wrap_template_part(
-                 FW_CHILD_THEME_PARTIALS_DIR . '/content-sermon-series'
+                 FW_CHILD_THEME_PARTIALS_DIR . '/content-sermon'
             );
 
             ?>

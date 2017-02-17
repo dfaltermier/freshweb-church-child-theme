@@ -720,6 +720,20 @@ body.error404 .title_subtitle_holder {
 /************************************************
  * Media Queries
  ************************************************/
+@media only screen and (min-width: 1001px) and (max-width: 1200px){
+
+    /*
+     * When the menu bar gets narrow, the menu options overlap the logo.
+     * Make the menu options smaller to adjust.
+     */
+    nav.main_menu > ul > li > a {
+        padding: 0 12px;
+        font-size: 14px;
+        letter-spacing: 0;
+    }
+
+}
+
 @media only screen and (min-width: 900px) {
 
     /**************
@@ -727,19 +741,21 @@ body.error404 .title_subtitle_holder {
      **************/
     /* Show more of the thumbnail images in the event listings */
     .child-events-listing-wide-image .ajde_evcal_calendar .eventon_events_list .eventon_list_event .ev_ftImg {
-        width: 250px;
+        height: 85px;
+        max-height: 85px;
+        width: 208px;
     }
     /* Slide the date over to the right to accommodate the larger thumbnail image above */
     .child-events-listing-wide-image .ajde_evcal_calendar .eventon_events_list .eventon_list_event .hasFtIMG .evcal_cblock, 
     .child-events-listing-wide-image .ajde_evcal_calendar .evo_pop_body .hasFtIMG .evcal_cblock {
-        left: 260px;
+        left: 220px;
     }
     /* Slide the text over to the right to accommodate the larger thumbnail image above */
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event a.sin_val.hasFtIMG .evcal_desc, 
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .sin_val.hasFtIMG .evcal_desc,
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .hasFtIMG .evcal_desc,
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .evo_pop_body .hasFtIMG .evcal_desc {
-        padding-left: 340px;
+        padding-left: 290px;
     }
 
 }

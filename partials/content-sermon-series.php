@@ -18,12 +18,6 @@ $date_format = get_option( 'date_format' );
 
             <article class="fw-child-sermon-series-entry">
 
-<!--
-                <p style="white-space: pre;">
-                <?php echo print_r($sermon_series_object, true); ?>
-                </p>
--->
-
                 <?php if ( isset( $sermon_series_object->image_attachment_id ) ) : ?>
 
                     <header>
@@ -62,7 +56,7 @@ $date_format = get_option( 'date_format' );
 
                     <?php if ( isset( $sermon_series_object->description ) ) : ?>
 
-                        <div class="fw-child-sermon-series-entry-excerpt"><?php echo FW_Child_Sermon_Functions::get_trimmed_excerpt( $sermon_series_object->description ); ?></div>
+                        <div class="fw-child-sermon-series-entry-excerpt"><?php echo FW_Child_Common_Functions::get_trimmed_excerpt( $sermon_series_object->description ); ?></div>
 
                     <?php endif; ?>
 

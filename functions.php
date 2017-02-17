@@ -48,6 +48,11 @@ class FW_Child {
             define( 'FW_CHILD_THEME_CSS_URI', FW_CHILD_THEME_URI . '/css' );
         }
 
+        // JS uri
+        if ( ! defined( 'FW_CHILD_THEME_JS_URI' ) ) {
+            define( 'FW_CHILD_THEME_JS_URI', FW_CHILD_THEME_URI . '/js' );
+        }
+
         // Includes directory
         if ( ! defined( 'FW_CHILD_THEME_INCLUDES_DIR' ) ) {
             define( 'FW_CHILD_THEME_INCLUDES_DIR', 'includes' );
@@ -88,11 +93,11 @@ class FW_Child {
 /**
  * Begin execution of the theme.
  */
-function run_fw_child_theme() {
+function fw_child_run_theme() {
 
     $theme = new FW_Child();
     $theme->run();
 
 }
 
-run_fw_child_theme();
+fw_child_run_theme();

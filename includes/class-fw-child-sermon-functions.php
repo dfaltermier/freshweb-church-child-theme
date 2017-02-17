@@ -1,6 +1,6 @@
 <?php
 /**
- * Sermon functions shared throughout the theme.
+ * Sermon functions shared throughout this theme.
  *
  */
 
@@ -17,7 +17,7 @@ class FW_Child_Sermon_Functions {
     /**
      * 
      *
-     * @since 0.9
+     * @since 1.0.0
      * @return object WP_Query object
      */
     public static function get_sermon_query() {
@@ -29,7 +29,7 @@ class FW_Child_Sermon_Functions {
     /**
      * 
      *
-     * @since 0.9
+     * @since 1.0.0
      * @return array 
      */
     public static function get_sermon_header_banner_data() {
@@ -246,16 +246,378 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * Sort series by latest sermon date
+     * 
      *
-     * Assist ctfw_content_type_archives by sorting series by sermon_latest_date
+     * @since 0.9
+     * @return 
+     */
+    public static function get_old_testament_books() {
+    
+        $books = array(
+            'genesis',
+            'exodus',
+            'leviticus',
+            'numbers',
+            'duteronomy',
+            'joshua',
+            'judges',
+            'ruth',
+            '1 samuel',
+            '2 samuel',
+            '1 kings',
+            '2 kings',
+            '1 chronicles',
+            '2 chronicles',
+            'ezra',
+            'nehemiah',
+            'esther',
+            'job',
+            'psalms',
+            'proverbs',
+            'ecclesiastes',
+            'song of Solomon',
+            'isaiah',
+            'jeremiah',
+            'lamentations',
+            'ezekiel',
+            'daniel',
+            'hosea',
+            'joel',
+            'amos',
+            'obadiah',
+            'jonah',
+            'micah',
+            'nahum',
+            'habakkuk',
+            'zephaniah',
+            'haggai',
+            'zechariah',
+            'malachi'        
+        );
+
+        return $books;
+
+    }
+
+    /**
+     * 
+     *
+     * @since 0.9
+     * @return 
+     */
+    public static function get_new_testament_books() {
+
+        $books = array(
+            'matthew',
+            'mark',
+            'luke',
+            'john',
+            'acts',
+            'romans',
+            '1 corinthians',
+            '2 corinthians',
+            'galatians',
+            'ephesians',
+            'philippians',
+            'colossians',
+            '1 thessalonians',
+            '2 thessalonians',
+            '1 timothy',
+            '2 timothy',
+            'titus',
+            'philemon',
+            'hebrews',
+            'james',
+            '1 peter',
+            '2 peter',
+            '1 john',
+            '2 john',
+            '3 john',
+            'jude',
+            'revelation'
+        );
+
+        return $books;
+
+    }
+
+   /**
+     * 
+     *
+     * @since 0.9
+     * @return 
+     */
+    public static function get_sermon_book_terms() {
+    
+        $terms = array();
+
+        /* Get all sermon book terms that are associated with at least one sermon.
+           get_terms() returns:
+            Array (
+                [0] => WP_Term Object (
+                    [term_id] => 117
+                    [name] => Genesis
+                    [slug] => genesis
+                    [term_group] => 0
+                    [term_taxonomy_id] => 117
+                    [taxonomy] => sermon_book
+                    [description] => 
+                    [parent] => 0
+                    [count] => 1
+                    [filter] => raw
+                )
+                ...
+            )
+        */
+        $terms = get_terms( array(
+            'taxonomy'   => 'sermon_book',
+            'hide_empty' => true
+        ) );
+
+        // Add the book url to each term object.
+        foreach ( $terms as $term ) {
+            
+            $term->link = get_term_link( $term );
+
+        }
+
+        return $terms;
+
+    }
+
+    /**
+     * 
+     *
+     * @since 0.9
+     * @return 
+     */
+    public static function get_sermon_books() {
+    
+        $old_testament_books = self::get_old_testament_books();
+        $new_testament_books = self::get_new_testament_books();
+        $book_terms          = self::get_sermon_book_terms();
+
+        $list = array(
+            array(
+                'title'      => 'Old Testament',
+                'book_terms' => array()
+            ),
+            array(
+                'title'      => 'New Testament',
+                'book_terms' => array()
+            ),
+            array(
+                'title'      => 'Books',
+                'book_terms' => array()
+            )
+        );
+
+        // Sort through our book terms, placing each term in the correct book array.
+        if ( isset( $book_terms ) ) {
+
+            foreach ( $book_terms as $book_term ) {
+
+                $book_name = strtolower( $book_term->name );
+
+                if ( in_array( $book_name, $old_testament_books ) ) {
+
+                    array_push( $list[0]['book_terms'], $book_term );
+
+                }
+                else if ( in_array( $book_name, $new_testament_books ) ) {
+
+                    array_push( $list[1]['book_terms'], $book_term );
+
+                }
+                else {
+
+                    array_push( $list[2]['book_terms'], $book_term );
+
+                }
+
+            }
+
+            usort( $list[0]['book_terms'], 'self::sort_old_testament_book_terms_by_canonical_order' );
+            usort( $list[1]['book_terms'], 'self::sort_new_testament_book_terms_by_canonical_order' );
+
+        }
+
+        return $list;
+
+    }
+
+    /**
+     * Sort Old Testament Bible books in canonical order.
+     *
+     * @since 1.7.2
+     */
+    public static function sort_old_testament_book_terms_by_canonical_order( $a, $b ) {
+
+        $old_testament_books = self::get_old_testament_books();
+
+        $a_name  = strtolower( $a->name );
+        $a_index = array_search( $a_name, $old_testament_books );
+
+        $b_name  = strtolower( $b->name );
+        $b_index = array_search( $b_name, $old_testament_books );
+        
+        if ( ( $a_index === false ) ||
+             ( $b_index === false ) ) {
+            return 0;
+        }
+
+        return ( $a_index === $b_index ) ? 0 : ( ( $a_index < $b_index ) ? -1 : 1 );
+
+    }
+
+    /**
+     * Sort New Testament Bible books in canonical order.
+     *
+     * @since 1.7.2
+     */
+    public static function sort_new_testament_book_terms_by_canonical_order( $a, $b ) {
+
+        $new_testament_books = self::get_new_testament_books();
+
+        $a_name  = strtolower( $a->name );
+        $a_index = array_search( $a_name, $new_testament_books );
+
+        $b_name  = strtolower( $b->name );
+        $b_index = array_search( $b_name, $new_testament_books );
+        
+        if ( ( $a_index === false ) ||
+             ( $b_index === false ) ) {
+            return 0;
+        }
+
+        return ( $a_index === $b_index ) ? 0 : ( ( $a_index < $b_index ) ? -1 : 1 );
+
+    }
+
+    /**
+     * Sort series by latest sermon date
      *
      * @since 1.7.2
      */
     public static function sort_series_by_latest_sermon( $a, $b ) {
+
         return $b->sermon_latest_date - $a->sermon_latest_date;
+
     }
 
+    /**
+     *  Build and return an $archives lookup table, sorted by year in descending order.
+     *
+     *  $archives = array(
+     *     '2016' => array(
+     *          'month  => 'November',
+     *          'count' => 2,
+     *          'url'   => 'http...'
+     *     ),
+     *      ...
+     *  );
+     *
+     * @since 0.9
+     * @return array Sermon data
+     */
+    public static function get_sermon_archives() {
+
+       $archives = array();
+       $matches  = array();
+
+      /*
+       * Get string containing list of archive dates. Example:
+        *  '<li><a href='http://church.freshwebstudio.com/2016/10/?post_type=sermon'>October 2016</a>&nbsp;(3)</li>
+        *   <li><a href='http://church.freshwebstudio.com/2016/07/?post_type=sermon'>July 2016</a>&nbsp;(1)</li>
+        *   <li><a href='http://church.freshwebstudio.com/2015/12/?post_type=sermon'>December 2015</a>&nbsp;(1)</li>'
+       */
+        $args = array(
+            'post_type'       => 'sermon',
+            'type'            => 'monthly',
+            'echo'            => false,
+            'show_post_count' => true,
+            'format'          => 'html',
+            'order'           => 'DESC'
+        );
+        $links = wp_get_archives( $args );
+
+        if ( empty( $links ) ) {
+            return $archives;
+        }
+
+        /*
+         * Let's split our $links string into an array of date strings.
+         *  array(
+         * '<li><a href='http://church.freshwebstudio.com/2016/10/?post_type=sermon'>October 2016</a>&nbsp;(3)',
+         *  '<li><a href='http://church.freshwebstudio.com/2016/07/?post_type=sermon'>July 2016</a>&nbsp;(1)',
+         *  '<li><a href='http://church.freshwebstudio.com/2015/12/?post_type=sermon'>December 2015</a>&nbsp;(1)</li>'
+         * )
+         */
+        $links = preg_split( "/<\/li>\s+/", trim( $links ) );
+
+        if ( $links === false ) { // Abandon ship
+            return $archives;
+        }
+
+        foreach( $links as $link ) {
+            preg_match( "/^<li><a href='(.+)'>(.+)\s(.+)<\/a>&nbsp;\((\d+)\).*$/", $link, $matches );
+
+            $url   = $matches[1];
+            $month = $matches[2];
+            $year  = $matches[3];
+            $count = $matches[4];
+            
+            // Create a structure containing our month data parsed from the link
+            $month_data = array(
+                'month' => $month,
+                'count' => $count,
+                'url'   => $url
+            );
+
+            // If we haven't created an entry for our $year yet, do so.
+            // Otherwise, push our month data onto the list for the existing $year. 
+            if ( empty( $archives[$year] ) ) {
+                $archives[$year] = array( $month_data );
+            }
+            else {
+                array_push( $archives[$year], $month_data );
+            }
+
+        }
+        
+        // Sort the sermon archives with months in calendar order
+        foreach( $archives as $year => $month_list ) {
+            usort( $month_list, 'self::sort_sermon_archives_by_month' );
+            $archives[$year] = $month_list;
+        }
+
+        return $archives;
+
+    }
+
+    /**
+     * Sort the sermon archives with months in calendar order
+     *
+     *  array(
+     *      array(
+     *          'month  => 'November',
+     *          'count' => 2,
+     *          'url'   => 'http...'
+     *      ),
+     *      ...
+     *  );
+     *
+     * @since 0.9
+     * @return array  list sorted by months
+     */
+    public static function sort_sermon_archives_by_month( $a, $b ) {
+
+        $a_month_index = date_parse( $a['month'] );
+        $b_month_index = date_parse( $b['month'] );
+
+        return ( $a_month_index['month'] - $b_month_index['month'] );
+
+    }
 
     /**
      * 
@@ -263,7 +625,7 @@ class FW_Child_Sermon_Functions {
      * @since 0.9
      * @return array Sermon data
      */
-    public static function get_custom_sermon_data( $post_id = null ) {
+    public static function get_custom_sermon_meta_data( $post_id = null ) {
 
         $post_id = $post_id ? $post_id : get_the_ID();
 
@@ -325,7 +687,7 @@ class FW_Child_Sermon_Functions {
      */
     public static function get_watch_video_url( $url ) {
 
-        return add_query_arg( 'watch', 'true', $url );
+        return add_query_arg( 'player', 'video', $url );
 
     }
 
@@ -337,7 +699,7 @@ class FW_Child_Sermon_Functions {
      */
     public static function get_listen_audio_url( $url ) {
 
-        return add_query_arg( 'listen', 'true', $url );
+        return add_query_arg( 'player', 'audio', $url );
 
     }
 
@@ -347,9 +709,9 @@ class FW_Child_Sermon_Functions {
      * @since 0.9
      * @return 
      */
-    public static function is_watch_video_url() {
+    public static function is_player_video() {
 
-        return ( 'true' === $_GET['watch'] ) ? true : false;
+        return ( ! empty($_GET['player']) && ('video' === $_GET['player'] ) ) ? true : false;
 
     }
 
@@ -359,23 +721,67 @@ class FW_Child_Sermon_Functions {
      * @since 0.9
      * @return 
      */
-    public static function is_listen_audio_url() {
+    public static function is_player_audio() {
     
-        return ( 'true' === $_GET['listen'] ) ? true : false;
+        return ( ! empty($_GET['player']) && ('audio' === $_GET['player'] ) ) ? true : false;
 
     }
 
     /**
+     * Return embed code based on audio/video URL or provided embed code.
      *
-     * @since 
-     * @global 
-     * @return 
+     * If content is URL, use oEmbed to get embed code. If the url is local, then 
+     * the file must exist or an empty string is returned. 
+     *
+     * If content is not URL, assume it is embed code and run do_shortcode() in
+     * case of [video], [audio] or [embed]
+     *
+     * @since 0.9
+     * @param  string  $content URL
+     * @return string  HTML embed code or empty string
      */
-    public static function get_trimmed_excerpt( $excerpt = null , $number_of_words = 55 ) {
+    public static function get_embed_code( $content ) {
 
-        $excerpt = isset( $excerpt ) ? $excerpt : get_the_excerpt();
-        $excerpt = FW_Child_Common_Functions::get_trimmed_excerpt( $excerpt, $number_of_words );
-        return $excerpt;
+        global $wp_embed;
+        $embed_code = '';
+
+        // Convert URL into media shortcode like [audio] or [video]
+        if ( FW_Child_Common_Functions::is_url( $content ) ) {
+
+            if ( FW_Child_Common_Functions::is_local_url( $content ) ) {
+
+                $filename = FW_Child_File_Functions::get_filename_from_local_url( $content );
+
+                if ( empty( $filename ) || ! FW_Child_File_Functions::is_filename_exists_in_uploads_folder( $filename ) ) {
+
+                    $content = '';
+
+                }
+
+            }
+
+            $embed_code = $wp_embed->shortcode( array(), $content );
+
+            // A link with the url is returned if the embed code failed. We don't want that.
+            if ( strpos( $embed_code, '<a' ) === 0 ) {
+
+                $embed_code = '';
+
+            }
+
+        }
+        // HTML or shortcode embed may have been provided
+        else {
+
+            $embed_code = $content;
+
+        }
+
+        // Run shortcode
+        // [video], [audio] or [embed] converted from URL or already existing in $content
+        $embed_code = do_shortcode( $embed_code );
+
+        return $embed_code;
 
     }
 

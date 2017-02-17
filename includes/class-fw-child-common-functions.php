@@ -139,4 +139,56 @@ class FW_Child_Common_Functions {
 
     }
 
+    /**
+     * Check if string is a URL
+     *
+     * @since 0.9
+     * @param string $string String to check for URL format
+     * @return bool True if string is URL
+     */
+    public static function is_url( $string ) {
+
+        return preg_match( '/^(http(s*)):\/\//i', $string ) ? true : false;
+
+    }
+
+    /**
+     * Check if URL is local
+     *
+     * @since 0.9
+     * @param string $url URL to test
+     * @return bool True if URL is local
+     */
+    public static function is_local_url( $url ) {
+
+        return ( self::is_url( $url ) && preg_match( '/^' . preg_quote( home_url(), '/' ) . '/', $url ) ) ? true : false;
+
+    }
+
+        /**
+     * 
+     *
+     * @since 0.9
+     * @return array Sermon data
+     */
+    public static function get_month_archive_date_from_permalink() {
+    
+        global $wp;
+
+        $request = $wp->request;  // Returns the 'year/month' from the uri path. e.g.: '2016/10'
+        $matches = array();
+        $dates   = array();
+
+        if ( preg_match( '/([0-9]{4})\/([0-9]{1,2})/', $request, $matches ) ) {
+
+            $dates['year']        = $matches[1];
+            $dates['month_index'] = $matches[2];
+            $dates['month_name']  = date( 'F', mktime( 0, 0, 0, $dates['month_index'] + 1, 0 ) );
+        
+        }
+
+        return $dates;
+
+    }
+
 }
