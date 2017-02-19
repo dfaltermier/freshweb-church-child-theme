@@ -196,49 +196,56 @@ class FW_Child_Sermon_Functions {
 
     }
 
-   /**
-     * 
-     *
-     * @since 0.9
-     * @return 
-     */
+    /**
+    * Get all sermon speakers that are associated with at least one sermon.
+    *
+    * Returns:
+    * Array (
+    *   [0] => WP_Term Object (
+    *       // Portion returned by get_terms():
+    *       [term_id] => 101
+    *       [name] => Jenny Markson
+    *       [slug] => jenny-markson
+    *       [term_group] => 0
+    *       [term_taxonomy_id] => 101
+    *       [taxonomy] => sermon_speaker
+    *       [description] => '...'
+    *       [parent] => 0
+    *       [count] => 3
+    *       [filter] => raw
+    *       // Other values manually added:
+    *       [link] => 'http://...'                  // Link to sermons by speaker.
+    *       [speaker_image_attachment_id] => '...'  // Speaker image id.
+    *       [speaker_url] => 'http://...'           // More info about speaker.
+    *    )
+    *    ...
+    *  )
+    *
+    * @since 0.9
+    * @return  array  See above.
+    */
     public static function get_sermon_speaker_terms() {
     
         $sermon_speakers = array();
 
-        /* Get all sermon speakers that are associated with at least one sermon.
-           get_terms() returns:
-
-            Array (
-                [0] => WP_Term Object (
-                    [term_id] => 101
-                    [name] => Jenny Markson
-                    [slug] => jenny-markson
-                    [term_group] => 0
-                    [term_taxonomy_id] => 101
-                    [taxonomy] => sermon_speaker
-                    [description] => '...'
-                    [parent] => 0
-                    [count] => 3
-                    [filter] => raw
-                )
-                ...
-            )
-        */
         $speaker_terms = get_terms( array(
             'taxonomy'   => 'sermon_speaker',
             'hide_empty' => true
         ) );
 
-        // Add the speaker url to each term object.
+        // Add additional properties to each term object.
         foreach ( $speaker_terms as $speaker_term ) {
             
+            // Link to sermons by speaker.
             $speaker_term->link = get_term_link( $speaker_term );
 
-            // Add our custom [plugin] sermon series data to our object. In this case,
-            // our image attachment id.
+            // Add our custom [plugin] sermon series data to our object.
+            // Add image attachment id.
             $custom_data = self::get_custom_sermon_speaker_data( $speaker_term->term_id );
-            $speaker_term->image_attachment_id = $custom_data['image_attachment_id'];
+            $speaker_term->speaker_image_attachment_id = $custom_data['speaker_image_attachment_id'];
+
+            // Add speaker url.
+            $speaker_term->speaker_url = $custom_data['speaker_url'];
         }
 
         return $speaker_terms;
@@ -669,15 +676,17 @@ class FW_Child_Sermon_Functions {
      */
     public static function get_custom_sermon_speaker_data( $term_id ) {
 
-        $image_attachment_id = get_term_meta( $term_id, 'fw_sermons_speaker_image_id', true );
+        $speaker_image_attachment_id = get_term_meta( $term_id, 'fw_sermons_speaker_image_id', true );
+        $speaker_url = get_term_meta( $term_id, 'fw_sermons_speaker_url', true );
 
         $data = array(
-            'image_attachment_id' => $image_attachment_id
+            'speaker_image_attachment_id' => $speaker_image_attachment_id,
+            'speaker_url' => $speaker_url
         );
 
         return $data;
 
-    }
+    }    
 
     /**
      * 

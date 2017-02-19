@@ -364,40 +364,28 @@
  * Sermon Speakers
  ******************************/
 .fw-child-sermon-speakers .fw-child-sermon-speaker-list {
-    -moz-column-count: 4;
-    -webkit-column-count: 4;
-    column-count: 4;
-    -moz-column-gap: 6.25em;
-    -webkit-column-gap: 6.25em;
-    column-gap: 6.25em;
-}
 
+}
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry {
-    padding-bottom: 3.1em;
-    padding-right: 1.50em;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
-    list-style: none;
-    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 40px;
+    padding: 0 20px;
+    vertical-align: top;
+    width: 33.3%;
 }
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-image-container {
-    margin-right: -1.4em; /* Center image */
     text-align: center;
 }
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-image {
-    max-width: 150px;
+    max-width: 200px;
     width: 100%;
 }
-
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-name {
-    position: relative;
+    text-align: center;
 }
-
-.fw-child-sermon-speakers .fw-child-sermon-speaker-count {
-    position: absolute;
-    right: -1.4em;
-    top: 0;
+.fw-child-sermon-speakers .fw-child-sermon-speaker-entry-speaker-link {
+    text-align: center;
 }
 
 /*******************************
@@ -605,12 +593,6 @@
     top: 4px;
 }
 
-
-
-
-
-
-
 /*******************************
  * Media queries
  ******************************/
@@ -627,6 +609,13 @@
     .tax-sermon_topic .content.content_top_margin,
     .tax-sermon_book .content.content_top_margin {
         margin-top: 0 !important;
+    }
+
+    /*******************************
+     * Sermon Speakers
+     ******************************/
+    .fw-child-sermon-speakers .fw-child-sermon-speaker-entry {
+        width: 49.5%;
     }
 
 }
@@ -671,10 +660,8 @@
     /*******************************
      * Sermon Speakers
      ******************************/
-    .fw-child-sermon-speakers .fw-child-sermon-speaker-list {
-        -moz-column-count: 3;
-        -webkit-column-count: 3;
-        column-count: 3;
+    .fw-child-sermon-speakers .fw-child-sermon-speaker-entry {
+        width: 49.5%;
     }
 
     /*******************************
@@ -711,10 +698,8 @@
     /*******************************
      * Sermon Speakers
      ******************************/
-    .fw-child-sermon-speakers .fw-child-sermon-speaker-list {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
+    .fw-child-sermon-speakers .fw-child-sermon-speaker-entry {
+        width: 100%;
     }
 
     /*******************************
