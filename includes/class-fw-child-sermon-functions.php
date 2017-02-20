@@ -9,13 +9,36 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class FW_Child_Sermon_Functions {
 
-    /**
-     *
-     */
-    function __construct() { }
+    // This query parameter will determine the sermon series page to display.
+    const SERMON_QUERY_PARAM_PAGE_NUMBER = 'page_number';
+
+    // Because the database load is heavy when building our sermon series
+    // data structure, we'll cache the data in a transient for 
+    // SERMON_SERIES_TRANSIENT_TIMEOUT seconds.
+    const SERMON_SERIES_TRANSIENT_TIMEOUT = 10;  // Seconds
+    const SERMON_SERIES_TRANSIENT_NAME    = 'fw_child_sermon_series';
 
     /**
-     * 
+     * Constructor
+     */
+    function __construct() {
+
+        // When a sermon is created, updated, or deleted, we'll want to delete our
+        // transient holding our cached sermon series data structure.
+        // Format example: 'save_post_{custom_post_type}'
+        add_action( 'save_post_sermon', array( $this, 'delete_sermon_series_transient_on_sermon_post_type_change', 10, 3 ) );
+
+        // When a sermon taxonomy term is created, updated, or deleted, we'll want to delete our
+        // transient holding our cached sermon series data structure.
+        // Format example: 'create_{$taxonomy}'
+        add_action( 'create_sermon_series', array( $this, 'delete_sermon_series_transient_on_sermon_series_term_change' ) );
+        add_action( 'edit_sermon_series',   array( $this, 'delete_sermon_series_transient_on_sermon_series_term_change' ) );
+        add_action( 'delete_sermon_series', array( $this, 'delete_sermon_series_transient_on_sermon_series_term_change' ) );
+
+    }
+
+    /**
+     * Return custom queries for our database. These may defined in any one of our sermon files.
      *
      * @since 1.0.0
      * @return object WP_Query object
@@ -27,7 +50,8 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Returns the text used in the header of each page. This text overlays the background
+     * header image. Each page can override this text via the apply_filter().
      *
      * @since 1.0.0
      * @return array 
@@ -48,11 +72,75 @@ class FW_Child_Sermon_Functions {
      * @since 0.9
      * @return 
      */
+    public static function get_sermon_series_with_pagination() {
+
+        $sermon_series = self::get_sermon_series();
+
+        /*
+         * 1. Create pagination code.
+         */
+        // What page are we on?
+        $paged = self::get_current_page_number();
+
+        // Number of sermon series to show per-page.
+        $sermon_series_per_page = get_option( 'posts_per_page', 8 );
+
+        // Get the total number of sermon series.
+        $total_number_of_sermon_series = count( $sermon_series );
+
+        $pagination_offset = ( $paged - 1 ) * $sermon_series_per_page;
+
+        //$big_number = 999999999; // Just for a placeholder.
+        $pagination = paginate_links( array(
+            //'base'      => str_replace( $big_number, '%_%', get_pagenum_link( $big_number ) ),
+            'base'      => get_permalink() . '%_%',
+            'format'    => '?' . self::SERMON_QUERY_PARAM_PAGE_NUMBER . '=%#%',
+            'current'   => $paged,
+            'total'     => ceil( $total_number_of_sermon_series / $sermon_series_per_page ),
+            'type'      => 'list',
+            'prev_text' => 'Previous',
+            'next_text' => 'Next'
+        ) );
+
+        $sermon_series = array_slice( $sermon_series, $pagination_offset, $sermon_series_per_page );
+
+        // Finally, return both our sermon series array and pagination code.
+        $sermon_series_data = array(
+            'series'     => $sermon_series,
+            'pagination' => $pagination
+        );
+
+        return $sermon_series_data;
+
+    }
+
+    /**
+     * Get the sermon series data used to populate the sermon-series.php page template.
+     * See below for data structure returned.
+     *
+     * The data we pull and build from the database is cached in a transient for
+     * SERMON_SERIES_TRANSIENT_TIMEOUT seconds.
+     *
+     * @since 0.9
+     * @return array
+     */
     public static function get_sermon_series() {
     
+        // Cache with transient because getting all series / sermons can be intensive
+        // It's possible this function is called more than once during a page load
+        // so let's cache it for a few seconds so the queries and loops are not repeated
+        $transient = get_transient( self::SERMON_SERIES_TRANSIENT_NAME );
+
+        if ( $transient ) {
+
+            $sermon_series = $transient;
+            return $sermon_series;
+
+        }
+
         $sermon_series = array();
 
-        /* Get all sermon series.
+        /* Get all sermon series terms.
            get_terms() returns:
 
             Array (
@@ -93,7 +181,6 @@ class FW_Child_Sermon_Functions {
 
         /* Get all sermons that are assigned to a series.
            get_posts() returns:
-
             Array (
                 [0] => WP_Post Object (
                     [ID] => 1156
@@ -151,7 +238,7 @@ class FW_Child_Sermon_Functions {
                 array( 'fields' => 'ids' ) // Return only ids
             );
 
-            // Add a 'sermons'
+            // Add 'sermons'
             foreach ( $series_ids_for_given_sermon as $series_id ) {
 
                 if ( isset( $sermon_series[$series_id] ) ) {
@@ -168,7 +255,9 @@ class FW_Child_Sermon_Functions {
 
         }
 
-        // Loop series to record latest and earliest sermon dates
+        // Loop through series to record latest and earliest sermon dates. We'll want to
+        // sort the sermon series by the latest date, but display both dates in the 
+        // sermon series entries.
         foreach ( $sermon_series as $series_id => $series_item ) {
 
             if ( isset( $series_item->sermons ) ) {
@@ -189,8 +278,11 @@ class FW_Child_Sermon_Functions {
 
         }
 
-        // Sort the sermon series with the most recent sermon dates first.
+        // Sort the sermon series with the most recent sermon [latest] dates first.
         usort( $sermon_series, 'self::sort_series_by_latest_sermon' );
+
+        // Cache our sermon series.
+        set_transient( self::SERMON_SERIES_TRANSIENT_NAME, $sermon_series, self::SERMON_SERIES_TRANSIENT_TIMEOUT );
 
         return $sermon_series;
 
@@ -253,10 +345,10 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return a list of Old Testament books sorted in Canonical order.
      *
      * @since 0.9
-     * @return 
+     * @return array
      */
     public static function get_old_testament_books() {
     
@@ -307,10 +399,10 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return a list of New Testament books sorted in Canonical order.
      *
      * @since 0.9
-     * @return 
+     * @return array
      */
     public static function get_new_testament_books() {
 
@@ -349,10 +441,10 @@ class FW_Child_Sermon_Functions {
     }
 
    /**
-     * 
+     * Return all sermon book terms that are associated with at least one sermon.
      *
      * @since 0.9
-     * @return 
+     * @return array
      */
     public static function get_sermon_book_terms() {
     
@@ -372,6 +464,8 @@ class FW_Child_Sermon_Functions {
                     [parent] => 0
                     [count] => 1
                     [filter] => raw
+                    // We manually add the following:
+                    [link] => 'http://...'
                 )
                 ...
             )
@@ -393,10 +487,12 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return all books associated with at least one sermon. The data structure returned
+     * orders the books by 'Old Testament,' 'New Testament,' and just 'Books.' The Biblical
+     * books are ordered in Canonical order.
      *
      * @since 0.9
-     * @return 
+     * @return array
      */
     public static function get_sermon_books() {
     
@@ -502,9 +598,10 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * Sort series by latest sermon date
+     * Sort sermon series by latest sermon date.
      *
      * @since 1.7.2
+     * @return positive number, 0, or negative number. See usort() for details.
      */
     public static function sort_series_by_latest_sermon( $a, $b ) {
 
@@ -615,7 +712,7 @@ class FW_Child_Sermon_Functions {
      *  );
      *
      * @since 0.9
-     * @return array  list sorted by months
+     * @return positive number, 0, or negative number. See usort() for details.
      */
     public static function sort_sermon_archives_by_month( $a, $b ) {
 
@@ -627,7 +724,7 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return the custom sermon post type data from our Sermon plugin.
      *
      * @since 0.9
      * @return array Sermon data
@@ -649,7 +746,7 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return the sermon series term data from our Sermon plugin.
      *
      * @since 0.9
      * @return array Sermon data
@@ -669,7 +766,7 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return the sermon speaker term data from our Sermon plugin.
      *
      * @since 0.9
      * @return array Sermon data
@@ -689,10 +786,10 @@ class FW_Child_Sermon_Functions {
     }    
 
     /**
-     * 
+     * Add 'player=video' query param to the give url.
      *
      * @since 0.9
-     * @return 
+     * @return string Modified url
      */
     public static function get_watch_video_url( $url ) {
 
@@ -701,10 +798,10 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Add 'player=audio' query param to the give url.
      *
      * @since 0.9
-     * @return 
+     * @return string Modified url
      */
     public static function get_listen_audio_url( $url ) {
 
@@ -713,26 +810,48 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     * 
+     * Return true if the url contains the query params 'player=video'.
      *
      * @since 0.9
-     * @return 
+     * @return bool
      */
     public static function is_player_video() {
 
-        return ( ! empty($_GET['player']) && ('video' === $_GET['player'] ) ) ? true : false;
+        return ( ! empty( $_GET['player'] ) && ('video' === $_GET['player'] ) ) ? true : false;
 
     }
 
     /**
-     * 
+     * Return true if the url contains the query params 'player=audio'.
      *
      * @since 0.9
-     * @return 
+     * @return bool
      */
     public static function is_player_audio() {
     
-        return ( ! empty($_GET['player']) && ('audio' === $_GET['player'] ) ) ? true : false;
+        return ( ! empty( $_GET['player'] ) && ('audio' === $_GET['player'] ) ) ? true : false;
+
+    }
+
+    /**
+     * We've created our own paginated pages when displaying the sermon-series.php page template.
+     * We don't want to display ALL sermon series on the one page. This gets lengthy for the user.
+     * Also, because we are caching the sermon series data structure, we have to implement our
+     * own pagination.
+     *
+     * To do this, we create the url /sermons/series?SERMON_QUERY_PARAM_PAGE_NUMBER={page number}.
+     * We examine the page number to determine which sermon series set to display.
+     *
+     * @since 0.9
+     * @return int  Page number
+     */
+    public static function get_current_page_number() {
+    
+        $page_number = ! empty( $_GET[self::SERMON_QUERY_PARAM_PAGE_NUMBER] ) 
+            ? $_GET[self::SERMON_QUERY_PARAM_PAGE_NUMBER]
+            : 1;
+
+        return $page_number;
 
     }
 
@@ -791,6 +910,47 @@ class FW_Child_Sermon_Functions {
         $embed_code = do_shortcode( $embed_code );
 
         return $embed_code;
+
+    }
+
+    /*********************************
+     * MAINTENANCE
+     *********************************
+    /**
+     * This method is called by the do_action() registered in our constructor. 
+     *
+     * When a sermon is created, updated, or deleted, we'll want to delete our
+     * transient holding our cached sermon series data structure.
+     *
+     * Note: save_post is called on Trash / Restore too, not just Add and Update (this is good)
+     *
+     * @since 1.7.9
+     * @param int  $post_id The post ID.
+     * @param post $post    The post object.
+     * @param bool $update  Whether this is an existing post being updated or not.
+     */
+    public function delete_sermon_series_transient_on_sermon_post_type_change( $post_id, $post, $update ) {
+
+        // Not on revisions
+        if ( wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        delete_transient( self::SERMON_SERIES_TRANSIENT_NAME );
+
+    }
+
+    /**
+     * This method is called by the do_action() registered in our constructor. 
+     *
+     * When a sermon taxonomy term is created, updated, or deleted, we'll want to delete our
+     * transient holding our cached sermon series data structure.
+     *
+     * @since 1.7.9
+     */
+    public function delete_sermon_series_transient_on_sermon_series_term_change() {
+
+        delete_transient( self::SERMON_SERIES_TRANSIENT_NAME );
 
     }
 

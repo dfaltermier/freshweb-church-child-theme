@@ -3,8 +3,10 @@
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$sermon_series = FW_Child_Sermon_Functions::get_sermon_series();
-$sermon_series_objects = array_values( $sermon_series );
+$sermon_series_data = FW_Child_Sermon_Functions::get_sermon_series_with_pagination();
+
+$sermon_series_objects = array_values( $sermon_series_data['series'] );
+$pagination = $sermon_series_data['pagination'];
 
 $date_format = get_option( 'date_format' );
 
@@ -70,6 +72,14 @@ $date_format = get_option( 'date_format' );
             </article>
 
         <?php endforeach; ?>
+
+        <?php if ( ! empty( $pagination) ) : ?>
+
+             <section class="fw-child-sermon-entry-pagination">
+                 <?php echo $pagination; ?>
+             </section>
+
+         <?php endif; ?>
  
     <?php else: ?>
 

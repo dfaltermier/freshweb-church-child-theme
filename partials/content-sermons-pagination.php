@@ -25,7 +25,7 @@ if ( ! $query ) {
             'total'     => $query->max_num_pages,
             'type'      => 'list',
             'prev_text' => 'Previous',
-            'next_text' => 'Next',
+            'next_text' => 'Next'
         ) );
         ?>
 

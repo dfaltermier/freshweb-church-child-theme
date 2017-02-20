@@ -210,6 +210,7 @@
  * Sermon entry listing pagination
  */
 .fw-child-sermon-entry-pagination {
+    clear: both;
     margin: 0 0 0.5em;
 }
 .fw-child-sermon-entry-pagination ul {

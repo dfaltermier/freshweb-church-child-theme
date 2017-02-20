@@ -77,7 +77,8 @@ class FW_Child_Front_Functions {
 
         // Sermon helper functions.
         locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-sermon-functions.php', true );
-    
+        $sermons = new FW_Child_Sermon_Functions();
+
         // Registers template_redirect for downloading files along with utility methods.
         locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-download-functions.php', true );
         $download = new FW_Child_Download_Functions();
