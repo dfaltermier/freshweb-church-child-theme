@@ -59,6 +59,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         $date_format = get_option( 'date_format' );
         $date_string = get_the_date( $date_format );
 
+        $prev_sermon_post = get_previous_post();
+        $next_sermon_post = get_next_post();
+
         ?>
 
         <article class="fw-child-single-sermon">
@@ -215,6 +218,57 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
         </article>
 
+        <?php if ( ! empty( $prev_sermon_post ) || ! empty( $next_sermon_post ) ) : ?>
+
+            <div class="fw-child-single-sermon-pagination">
+
+                <div class="fw-child-single-sermon-pagination-previous-entry">
+
+                    <?php if ( ! empty( $prev_sermon_post ) ) : ?>
+
+                        <a href="<?php echo esc_url( get_the_permalink( $prev_sermon_post->ID ) ); ?>"><img
+                           class="fw-child-single-sermon-pagination-previous-tab" 
+                           src="<?php echo FW_CHILD_THEME_IMAGE_URI . '/sermon-corner-previous.600x600-min.png' ?>"
+                           alt="Previous sermon" /></a>
+
+                        <?php
+                        // Pass the variable $sermon_post to our partial template.
+                        ?>
+                        <?php $sermon_post = $prev_sermon_post; ?>
+                        <?php include( locate_template( FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-entry-prev-or-next.php' ) ); ?>
+
+                    <?php endif; ?>
+
+                </div>
+
+                <div class="fw-child-single-sermon-pagination-next-entry">
+
+                    <div class="fw-child-single-sermon-pagination-entry">
+
+                    <?php if ( ! empty( $next_sermon_post ) ) : ?>
+
+                        <a href="<?php echo esc_url( get_the_permalink( $next_sermon_post->ID ) ); ?>"><img
+                           class="fw-child-single-sermon-pagination-next-tab" 
+                           src="<?php echo FW_CHILD_THEME_IMAGE_URI . '/sermon-corner-next.600x600-min.png' ?>"
+                           alt="Next sermon" /></a>
+
+                        <?php
+                        // Pass the variable $sermon_post to our partial template.
+                        ?>
+                        <?php $sermon_post = $next_sermon_post; ?>
+                        <?php include( locate_template( FW_CHILD_THEME_PARTIALS_DIR . '/content-sermons-entry-prev-or-next.php' ) ); ?>
+
+                    <?php endif; ?>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <?php endif; ?>
+
     <?php endwhile; ?>
+
 <?php endif; ?> 
 

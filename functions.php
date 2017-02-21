@@ -53,6 +53,11 @@ class FW_Child {
             define( 'FW_CHILD_THEME_JS_URI', FW_CHILD_THEME_URI . '/js' );
         }
 
+        // Images uri
+        if ( ! defined( 'FW_CHILD_THEME_IMAGE_URI' ) ) {
+            define( 'FW_CHILD_THEME_IMAGE_URI', FW_CHILD_THEME_URI . '/images' );
+        }
+
         // Includes directory
         if ( ! defined( 'FW_CHILD_THEME_INCLUDES_DIR' ) ) {
             define( 'FW_CHILD_THEME_INCLUDES_DIR', 'includes' );
