@@ -43,18 +43,31 @@ $speaker_term_counter = 0;
 
                     <?php endif; ?>
 
-                    <div class="fw-child-sermon-speaker-entry-name">
-                        <a href="<?php echo esc_url( $term->link ); ?>"><?php echo esc_html( $term->name ); ?></a>
-                        <span class="fw-child-sermon-speaker-count">( <?php echo $term->count; ?> )</span>
-                    </div>
+                    <?php if ( ! empty( $term->name ) ) : ?>
 
-                    <?php if ( ! empty( $image_html ) ) : ?>
+                        <div class="fw-child-sermon-speaker-entry-name">
+                            <a href="<?php echo esc_url( $term->link ); ?>"><?php echo esc_html( $term->name ); ?></a>
+
+                            <?php if ( ! empty( $term->count ) ) : ?>
+                                <span class="fw-child-sermon-speaker-count">( <?php echo $term->count; ?> )</span>
+                            <?php endif; ?>
+
+                        </div>
+
+                    <?php endif; ?>
+
+                    <?php if ( ! empty( $term->description  ) ) : ?>
 
                         <div class="fw-child-sermon-speaker-entry-description">
                             <?php echo esc_html( $term->description ); ?>
-                            <div class="fw-child-sermon-speaker-entry-speaker-link">
-                                [ <a href="<?php echo esc_url( $term->speaker_url ); ?>">Speaker Details</a> ]
-                            </div>
+                        </div>
+
+                    <?php endif; ?>
+
+                    <?php if ( ! empty( $term->speaker_url  ) ) : ?> 
+                         
+                        <div class="fw-child-sermon-speaker-entry-speaker-link">
+                            <a href="<?php echo esc_url( $term->speaker_url ); ?>">[ Speaker Details ]</a>
                         </div>
 
                     <?php endif; ?>
