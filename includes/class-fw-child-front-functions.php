@@ -59,6 +59,23 @@ class FW_Child_Front_Functions {
                 true
             );
 
+             // Enqueue a client-specific stylesheet if one exists.
+            if ( defined( 'FW_CHILD_CLIENT_CSS_FILE_PATH' ) &&
+                 defined( 'FW_CHILD_CLIENT_CSS_FILE_URI' ) ) {
+
+                if ( file_exists( FW_CHILD_CLIENT_CSS_FILE_PATH ) ) {
+
+                    wp_enqueue_style(
+                        'fw-child-client-css-stylesheet', 
+                        FW_CHILD_CLIENT_CSS_FILE_URI, 
+                        array( 'fw-child-theme-sermon-stylesheet' ),
+                        FW_CHILD_THEME_VERSION
+                    );
+
+                }
+
+            }
+
         }
 
     }

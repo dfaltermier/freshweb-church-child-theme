@@ -1,5 +1,5 @@
 /*
- * Stylesheet for Sermon Post Type
+ * Stylesheet for Sermons
  */
 
 /*
@@ -60,40 +60,40 @@
     transition: background-image 0.5s ease;
 }
 .fw-child-sermon-navigation .fw-child-sermons a {
-    background-image: url("../images/sermon-button-sermons-light.212x231.png");
+    background-image: url("../images/sermon-button-sermons-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermons a:hover {
-    background-image: url("../images/sermon-button-sermons-dark.212x231.png");
+    background-image: url("../images/sermon-button-sermons-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-series a {
-    background-image: url("../images/sermon-button-series-light.212x231.png");
+    background-image: url("../images/sermon-button-series-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-series a:hover {
-    background-image: url("../images/sermon-button-series-dark.212x231.png");
+    background-image: url("../images/sermon-button-series-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-topics a {
-    background-image: url("../images/sermon-button-topics-light.212x231.png");
+    background-image: url("../images/sermon-button-topics-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-topics a:hover {
-    background-image: url("../images/sermon-button-topics-dark.212x231.png");
+    background-image: url("../images/sermon-button-topics-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-books a {
-    background-image: url("../images/sermon-button-books-light.212x231.png");
+    background-image: url("../images/sermon-button-books-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-books a:hover {
-    background-image: url("../images/sermon-button-books-dark.212x231.png");
+    background-image: url("../images/sermon-button-books-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-speakers a{
-    background-image: url("../images/sermon-button-speakers-light.212x231.png");
+    background-image: url("../images/sermon-button-speakers-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-speakers a:hover {
-    background-image: url("../images/sermon-button-speakers-dark.212x231.png");
+    background-image: url("../images/sermon-button-speakers-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-dates a {
-    background-image: url("../images/sermon-button-dates-light.212x231.png");
+    background-image: url("../images/sermon-button-dates-light.212x231-min.png");
 }
 .fw-child-sermon-navigation .fw-child-sermon-dates a:hover {
-    background-image: url("../images/sermon-button-dates-dark.212x231.png");
+    background-image: url("../images/sermon-button-dates-dark.212x231-min.png");
 }
 
 /* CSS Trick: Preload background images for navigation hover-state backgrounds.
@@ -109,22 +109,22 @@
     width: 110px;
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermons {
-    background-image: url("../images/sermon-button-sermons-dark.212x231.png");
+    background-image: url("../images/sermon-button-sermons-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermon-series {
-    background-image: url("../images/sermon-button-series-dark.212x231.png");
+    background-image: url("../images/sermon-button-series-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermon-topics {
-    background-image: url("../images/sermon-button-topics-dark.212x231.png");
+    background-image: url("../images/sermon-button-topics-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermon-books {
-    background-image: url("../images/sermon-button-books-dark.212x231.png");
+    background-image: url("../images/sermon-button-books-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermon-speakers {
-    background-image: url("../images/sermon-button-speakers-dark.212x231.png");
+    background-image: url("../images/sermon-button-speakers-dark.212x231-min.png");
 }
 .fw-child-sermon-navigation-preload-image-depot .fw-child-sermon-dates {
-    background-image: url("../images/sermon-button-dates-dark.212x231.png");
+    background-image: url("../images/sermon-button-dates-dark.212x231-min.png");
 }
 
 /*

@@ -67,6 +67,22 @@ class FW_Child {
         if ( ! defined( 'FW_CHILD_THEME_PARTIALS_DIR' ) ) {
             define( 'FW_CHILD_THEME_PARTIALS_DIR', 'partials' );
         }
+
+        /*
+         * Define the file path and uri to our client-specific stylesheet, which may or may not exist.
+         * Normally, this stylesheet is maintained in a pseudo-theme folder created just for the purpose
+         * of holding this file.
+         */
+        if ( ! defined( 'FW_CHILD_CLIENT_CSS_FILE_PATH' ) ) {
+            $root_path = dirname( FW_CHILD_THEME_PATH );
+            define( 'FW_CHILD_CLIENT_CSS_FILE_PATH', $root_path . '/bridge-child-client/css/client.css' );
+        }
+
+        if ( ! defined( 'FW_CHILD_CLIENT_CSS_FILE_URI' ) ) {
+            $root_uri = dirname( FW_CHILD_THEME_URI );
+            define( 'FW_CHILD_CLIENT_CSS_FILE_URI', $root_uri . '/bridge-child-client/css/client.css' );
+        }
+
     }
 
     /**
