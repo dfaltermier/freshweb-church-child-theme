@@ -598,25 +598,12 @@ div.child-home-meet-the-pastor h2 {
     margin-right: 0;
 }
 
-/* 
- * Is this needed? 2016-02-21
- * Since we have a white header, we'll need to add a bottom border
- * on blog pages */
-.blog header,
-.single header,
-.search header,
-.archive header,
-.category header,
-.error404 header {
-   /* border-bottom: 1px solid #ccc; */
-}
 /* Give some vertical space under header for blog pages. */
 .blog .content,
 .single-post .content,
 .search .content,
-.archive .content,
-.category .content,
-.author .content,
+.archive.category .content,
+.archive.author .content,
 .error404 .content {
     margin-top: 95px !important;
 }

@@ -714,20 +714,6 @@
  ******************************/
 @media only screen and (max-width: 1000px) {
 
-    /*
-     * The parent theme inserts a margin-top: 95px for 'archive' pages under a
-     * max-width of 1000px. Override this for sermon pages. The normal 'News'
-     * archive page doesn't have a header banner. Sermons are an exception
-     * to this and need to remove this margin.
-     */
-    .tax-sermon_series .content.content_top_margin,
-    .tax-sermon_speaker .content.content_top_margin,
-    .tax-sermon_topic .content.content_top_margin,
-    .tax-sermon_book .content.content_top_margin,
-    .archive.post-type-archive-sermon .content {
-        margin-top: 0 !important;
-    }
-
     /*******************************
      * Sermon Speakers
      ******************************/
