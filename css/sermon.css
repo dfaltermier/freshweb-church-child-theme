@@ -723,7 +723,8 @@
     .tax-sermon_series .content.content_top_margin,
     .tax-sermon_speaker .content.content_top_margin,
     .tax-sermon_topic .content.content_top_margin,
-    .tax-sermon_book .content.content_top_margin {
+    .tax-sermon_book .content.content_top_margin,
+    .archive.post-type-archive-sermon .content {
         margin-top: 0 !important;
     }
 
