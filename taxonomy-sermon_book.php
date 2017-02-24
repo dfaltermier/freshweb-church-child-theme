@@ -1,24 +1,42 @@
 <?php
 /**
- * 
+ * Displays the archived (and paginated) page of sermons based on a given sermon book
+ *
+ * WordPress loads this file with a url similar to:
+ *     http://your-church-domain/sermons/book/proverbs/
+ * where 'proverbs' is the selected book by the user.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Page
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
+ *
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the text used in the header of this page. This text overlays the background
+ * header image. This method is called via an apply_filter() from the method referenced
+ * by 'see' below.
  *
+ * @since 1.1.0
+ * @see   FW_Child_Sermon_Functions::get_sermon_header_banner_data()
+ *
+ * @param  array $data Header text components.
+ * @return array       Modified text.
  */
 function fw_child_sermon_header_banner_data( $data ) {
 
-    $query_results = get_queried_object();
-
+    $query_results = get_queried_object(); // Retrieve the currently queried WP object.
     $data['subtitle'] = 'on ' . $query_results->name;
     return $data;
 
 }
-
-// Make query available via filter
+// Make method above available via apply_filter().
 add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner_data' );
 
 ?>

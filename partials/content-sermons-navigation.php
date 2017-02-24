@@ -1,6 +1,13 @@
 <?php
 /**
- * Navigation buttons that lead the contents of each Sermon page.
+ * Displays the navigation buttons under the header image
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Partial
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access

@@ -1,8 +1,15 @@
 /*
-Theme Name: Bridge Child
-Description: This is your church website theme. It is a child theme of the parent Bridge theme. Theme modifications should be done here instead of the parent theme.
-Version: 1.2.6
-Author: FreshWeb Studio
-Author URI: http://www.freshwebstudio.com
-Template: bridge
+Theme Name:   Bridge Child
+Description:  This is your church website theme. It is a child theme of the parent Bridge theme. Theme modifications should be done here instead of the parent theme directly.
+Version:      1.1.0
+Author:       FreshWeb Studio
+Author URI:   https://freshwebstudio.com
+Copyright:    (c) 2017 freshwebstudio.com
+License:      GNU General Public License v2.0
+License URI:  http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Template:     bridge
 */
+
+/*
+ * See ./css/main.css for our priimary stylesheet.
+ */

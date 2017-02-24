@@ -1,18 +1,35 @@
 <?php
 /**
- * Child theme bootstrap file.
+ * Bootstrapping WordPress Theme functions file
  *
+ * This file is used by WordPress to kick-start our theme.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Bootstrapping class.
+ *
+ * All of our theme dependencies are initalized here. This class is instantiated below.
+ *
+ * @since 1.1.0
+ */
 class FW_Child {
 
     function __construct() { }
 
     /**
-     * Kick it off
+     * Run our initialization.
+     *
+     * @since 1.1.0
      */
     public function run() {
 
@@ -21,8 +38,10 @@ class FW_Child {
     
     }
 
-    /*
-     * Setup global constants.
+    /**
+     * Define global constants.
+     *
+     * @since 1.1.0
      */
     private function setup_constants() {
 
@@ -86,7 +105,9 @@ class FW_Child {
     }
 
     /**
-     * Include required files
+     * Include required files.
+     *
+     * @since 1.1.0
      */
     private function includes() {
 
@@ -113,6 +134,8 @@ class FW_Child {
 
 /**
  * Begin execution of the theme.
+ *
+ * @since 1.1.0
  */
 function fw_child_run_theme() {
 
@@ -121,4 +144,6 @@ function fw_child_run_theme() {
 
 }
 
+// Kick things off.
 fw_child_run_theme();
+

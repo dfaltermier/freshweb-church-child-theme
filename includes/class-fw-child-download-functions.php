@@ -1,20 +1,32 @@
 <?php
 /**
- * Download Functions
+ * This file contains utility methods for downloading video/audio files.
+ * This feature is available on pages displaying single sermons.
  *
- * @copyright  Copyright (c) 2013 - 2015, churchthemes.com
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.
+ *
+ * This file incorporates portions of code from the Maranatha Church Theme
+ * (https://churchthemes.com/themes/maranatha). The original code is 
+ * copyright (c) 2015, churchthemes.com and is distributed under the terms
+ * of the GNU GPL license 2.0 or later 
+ * (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class wrapper for all methods.
+ *
+ * @since 1.1.0
+ */
 class FW_Child_Download_Functions {
 
-    /**
-     * 
-     *
-     */
     function __construct() {
 
         // Certain url structures instruct us to download files. See method for detalls.
@@ -30,6 +42,7 @@ class FW_Child_Download_Functions {
      *
      * This information was useful: http://wordpress.stackexchange.com/questions/3480/how-can-i-force-a-file-download-in-the-wordpress-backend
      *
+     * @since  1.1.0
      * @global object $wp_query
      */    
     public function download() {
@@ -82,7 +95,7 @@ class FW_Child_Download_Functions {
 
             }
 
-            // Failure of any type results in 404 file not found
+            // Failure of any type results in 404 file not found.
             $wp_query->set_404();
             status_header( 404 );
 
@@ -98,7 +111,7 @@ class FW_Child_Download_Functions {
      * Makes this:  http://yourname.com/?download=myfile.mp4
      * Out of:      http://yourname.com/wp-content/uploads/myfile.mp4
      *
-     * @since 
+     * @since  1.1.0
      * @param  string $url URL
      * @return string Download URL, empty string, or original url
      */

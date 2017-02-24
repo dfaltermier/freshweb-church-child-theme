@@ -1,13 +1,33 @@
 <?php
 /**
  * Template Name: Sermon Dates
+ *
+ * WP page template to display sermon dates.
+ *
+ * WordPress loads this file with a url similar to:
+ *     http://your-church-domain/sermons/dates/
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Page_Template
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the text used in the header of this page. This text overlays the background
+ * header image. This method is called via an apply_filter() from the method referenced
+ * by 'see' below.
  *
+ * @since 1.1.0
+ * @see   FW_Child_Sermon_Functions::get_sermon_header_banner_data()
+ *
+ * @param  array $data Header text components.
+ * @return array       Modified text.
  */
 function fw_child_sermon_header_banner_data( $data ) {
 
@@ -15,8 +35,7 @@ function fw_child_sermon_header_banner_data( $data ) {
     return $data;
 
 }
-
-// Make query available via filter
+// Make method above available via apply_filter().
 add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner_data' );
 
 ?>

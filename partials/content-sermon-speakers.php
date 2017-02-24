@@ -1,4 +1,17 @@
 <?php
+/**
+ * Displays the sermon speakers
+ *
+ * WordPress loads this partial file with a url similar to:
+ *     http://your-church-domain/sermons/speakers/
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Partial
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
+ */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -67,7 +80,7 @@ $speaker_term_counter = 0;
                     <?php if ( ! empty( $term->speaker_url  ) ) : ?> 
                          
                         <div class="fw-child-sermon-speaker-entry-speaker-link">
-                            <a href="<?php echo esc_url( $term->speaker_url ); ?>">[ Speaker Details ]</a>
+                            [ <a href="<?php echo esc_url( $term->speaker_url ); ?>">Speaker Details</a> ]
                         </div>
 
                     <?php endif; ?>

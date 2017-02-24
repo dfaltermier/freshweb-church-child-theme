@@ -1,11 +1,22 @@
 <?php
 /**
- * Header banner.
+ * Displays the header image with the title and subtitle overlay on each page.
+ *
+ * Because we are a child theme of the Bridge parent theme, we need to wrap our
+ * contents within the parent theme's html.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Partial
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Get page-specific header background image (via $class) and title/subtitle.
 $banner_data = FW_Child_Sermon_Functions::get_sermon_header_banner_data();
 
 $class    = $banner_data['class'];

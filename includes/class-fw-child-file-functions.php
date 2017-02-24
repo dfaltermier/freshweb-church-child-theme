@@ -1,8 +1,29 @@
 <?php
+/**
+ * This file contains utility methods for manipulating files.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.
+ *
+ * This file incorporates portions of code from the Maranatha Church Theme
+ * (https://churchthemes.com/themes/maranatha). The original code is 
+ * copyright (c) 2015, churchthemes.com and is distributed under the terms
+ * of the GNU GPL license 2.0 or later 
+ * (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
+ */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class wrapper for all methods.
+ *
+ * @since 1.1.0
+ */
 class FW_Child_File_Functions {
 
     function __construct() {
@@ -12,8 +33,7 @@ class FW_Child_File_Functions {
     /**
      * Retrieves the list of common file extensions and their types.
      *
-     * @since 4.6.0
-     *
+     * @since  1.1.0
      * @return array Array of file extensions types keyed by the type of file.
      */
     public static function get_allowed_file_extensions_and_mime_types() {
@@ -46,8 +66,10 @@ class FW_Child_File_Functions {
     /**
      * Validates a filename to ensure it does not contain any path info.
      *
-     * @param string $filename
-     * @return bool  True if basename is valid.
+     * @since  1.1.0
+     *
+     * @param  string $filename
+     * @return bool   True if basename is valid.
      */
     public static function is_valid_basename( $filename ) {
 
@@ -65,11 +87,11 @@ class FW_Child_File_Functions {
      *
      * You can optionally define the mime array, if needed.
      *
-     * @since 
+     * @since  1.1.0
      *
-     * @param string $filename File name or path.
-     * @param array  $mimes    Optional. Key is the file extension with value as the mime type.
-     * @return array Values with extension first and mime type.
+     * @param  string $filename File name or path.
+     * @param  array  $mimes    Optional. Key is the file extension with value as the mime type.
+     * @return array            Values with extension first and mime type.
      */
     public static function get_file_type( $filename, $mimes = null ) {
 
@@ -102,9 +124,9 @@ class FW_Child_File_Functions {
      *
      * Used primarily to extract a filename to be downloaded locally.
      *
-     * @since  0.9
+     * @since  1.1.0
      * @param  string $url URL
-     * @return string filename or empty string
+     * @return string      Filename or empty string
      */
     public static function get_filename_from_local_url( $url ) {
 
@@ -138,7 +160,7 @@ class FW_Child_File_Functions {
     /**
      * Returns true if the given file exists in the /uploads folder.
      *
-     * @since  0.9
+     * @since  1.1.0
      * @param  string $filename  Filename
      * @return bool
      */
@@ -158,6 +180,5 @@ class FW_Child_File_Functions {
         return false;
 
     }
-
 
 }

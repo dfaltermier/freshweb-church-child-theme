@@ -1,13 +1,36 @@
 <?php
 /**
- * 
+ * Displays the paginated list of sermons sorted by date.
+ *
+ * WordPress invokes this file when the user selects a date from the 
+ *     http://your-church-domain/2 sermons/dates/ page.
+ *
+ * WordPress loads this file with a url similar to:
+ *     http://your-church-domain/2016/10/?post_type=sermon
+ * where the date is the date selected by the user.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Page
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
+ *
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the text used in the header of this page. This text overlays the background
+ * header image. This method is called via an apply_filter() from the method referenced
+ * by 'see' below.
  *
+ * @since 1.1.0
+ * @see   FW_Child_Sermon_Functions::get_sermon_header_banner_data()
+ *
+ * @param  array $data Header text components.
+ * @return array       Modified text.
  */
 function fw_child_sermon_header_banner_data( $data ) {
 
@@ -20,8 +43,7 @@ function fw_child_sermon_header_banner_data( $data ) {
     return $data;
 
 }
-
-// Make query available via filter
+// Make method above available via apply_filter().
 add_filter( 'fw_child_sermon_header_banner_data', 'fw_child_sermon_header_banner_data' );
 
 ?>

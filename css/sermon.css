@@ -1,10 +1,10 @@
 /*
- * Stylesheet for Sermons
+ * Stylesheet for Sermons.
  */
 
-/*
+/*******************************
  * Utility classes
- */
+ ******************************/
 .fw-child-clearfix:before {
     content: "";
     display: table;
@@ -386,6 +386,9 @@
 }
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-speaker-link {
     text-align: center;
+}
+.fw-child-sermon-speakers .fw-child-sermon-speaker-entry-speaker-link:not(a) {
+    color: #666;
 }
 
 /*******************************

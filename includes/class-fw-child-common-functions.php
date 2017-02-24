@@ -1,12 +1,29 @@
 <?php
 /**
- * Common functions shared throughout the theme.
+ * Common utility methods used throughout the theme.
  *
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
+ *
+ * This file incorporates portions of code from the Maranatha Church Theme
+ * (https://churchthemes.com/themes/maranatha). The original code is 
+ * copyright (c) 2015, churchthemes.com and is distributed under the terms
+ * of the GNU GPL license 2.0 or later 
+ * (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class wrapper for all methods.
+ *
+ * @since 1.1.0
+ */
 class FW_Child_Common_Functions {
 
     function __construct() { }
@@ -20,9 +37,10 @@ class FW_Child_Common_Functions {
      * that our rows are formatted and styled consistently with the rest
      * of the theme.
      *
-     * @since 0.9
+     * @since 1.1.0
+     *
      * @param string $slug The slug name for the generic template.
-     * @param string $name The name of the specialized template.
+     * @param string $name Optional. The name of the specialized template.
      */
     public static function wrap_template_part( $slug, $name = null ) {
         ?>
@@ -45,15 +63,15 @@ class FW_Child_Common_Functions {
     } 
 
     /**
-     * Get/set $paged
+     * Get/set $paged.
      *
      * For use in templates that can be used as static front page.
      * get_query_var( 'paged' ) returns nothing on front page, but get_query_var( 'page' ) does.
      * This returns and sets globally $paged so that the query and pagination work.
      *
-     * @since 0.9
-     * @global int $paged
-     * @return int Current page number
+     * @since  1.1.0
+     * @global int $paged  Current Page number.
+     * @return int         Current page number.
      */
     public static function get_current_page_number() {
 
@@ -67,10 +85,11 @@ class FW_Child_Common_Functions {
     }
 
     /**
+     * Returns the given excerpt cleaned and sanitized.
      *
-     * @since 
-     * @global 
-     * @return 
+     * @since  1.1.0
+     * @param  string  $excerpt  Optional. Post or page excerpt. Default: current post excerpt.
+     * @return string            Sanitized excerpt.
      */
     public static function get_the_excerpt( $excerpt = null ) {
 
@@ -82,10 +101,13 @@ class FW_Child_Common_Functions {
     }
 
     /**
+     * Returns the given excerpt cleaned, sanitized and trimmed to the given
+     * number of words.
      *
-     * @since 
-     * @global 
-     * @return 
+     * @since  1.1.0
+     * @param  string  $excerpt          Optional. Post or page excerpt. Default: current post excerpt.
+     * @param  int     $number_of_words  Optional. Truncate excerpt to this length in words.
+     * @return string                    Excerpt.
      */
     public static function get_trimmed_excerpt( $excerpt = null , $number_of_words = 55 ) {
 
@@ -97,10 +119,13 @@ class FW_Child_Common_Functions {
     }
 
     /**
+     * Return a date string as 'start - end' (e.g.: October 6, 2013 - July 7, 2016)
      *
-     * @since 
-     * @global 
-     * @return 
+     * @since  1.1.0
+     * @param  int     $start_date   Epoch seconds.
+     * @param  int     $end_date     Epoch seconds.
+     * @param  string  $data_format  Date string format.
+     * @return string                Formatted date string.
      */
     public static function create_date_range_string( $start_date, $end_date, $date_format ) {
 
@@ -131,7 +156,7 @@ class FW_Child_Common_Functions {
         }
 
         $start_date_formatted = date_i18n( $start_date_format, $start_date );
-        $end_date_formatted = date_i18n( $end_date_format, $end_date );
+        $end_date_formatted   = date_i18n( $end_date_format, $end_date );
 
         $date_string = $start_date_formatted . ' - ' . $end_date_formatted;
 
@@ -140,11 +165,11 @@ class FW_Child_Common_Functions {
     }
 
     /**
-     * Check if string is a URL
+     * Check if string is a URL.
      *
-     * @since 0.9
-     * @param string $string String to check for URL format
-     * @return bool True if string is URL
+     * @since  1.1.0
+     * @param  string $string  String to check for URL format
+     * @return bool            True if string is URL
      */
     public static function is_url( $string ) {
 
@@ -153,11 +178,11 @@ class FW_Child_Common_Functions {
     }
 
     /**
-     * Check if URL is local
+     * Check if URL is local.
      *
-     * @since 0.9
-     * @param string $url URL to test
-     * @return bool True if URL is local
+     * @since  1.1.0
+     * @param  string $url  URL to test
+     * @return bool         True if URL is local
      */
     public static function is_local_url( $url ) {
 
@@ -165,11 +190,11 @@ class FW_Child_Common_Functions {
 
     }
 
-        /**
-     * 
+    /**
+     * Return date year and month from the current permalink.
      *
-     * @since 0.9
-     * @return array Sermon data
+     * @since  1.1.0
+     * @return array Sermon date components (e.g.: year, month index and name). See data structure below.
      */
     public static function get_month_archive_date_from_permalink() {
     

@@ -1,18 +1,33 @@
 <?php
 /**
- * This file provides functions for the frontend only.
+ * This file is invoked when the frontend is viewed.
  *
+ * Loads all the necessary CSS, JavaScript, and PHP files.
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class wrapper for all methods.
+ *
+ * @since 1.1.0
+ */
 class FW_Child_Front_Functions {
 
     function __construct() {
 
-        // The Bridge theme comes with a child theme template. It shows to register the add_action
-        // method at '11' so that all parent stylesheets get loaded first.
+        /*
+         * The Bridge theme comes with a child theme template. It shows to register the add_action
+         * method at '11' so that all parent stylesheets get loaded first.
+         */
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 11 );
 
         // Include files needed for the frontend.
@@ -22,6 +37,8 @@ class FW_Child_Front_Functions {
 
     /**
      * Enqueue our scripts and stylesheets.
+     *
+     * @since 1.1.0
      */
     public function enqueue_scripts() {
 
@@ -59,7 +76,7 @@ class FW_Child_Front_Functions {
                 true
             );
 
-             // Enqueue a client-specific stylesheet if one exists.
+            // Enqueue a client-specific stylesheet if one exists.
             if ( defined( 'FW_CHILD_CLIENT_CSS_FILE_PATH' ) &&
                  defined( 'FW_CHILD_CLIENT_CSS_FILE_URI' ) ) {
 
@@ -82,6 +99,8 @@ class FW_Child_Front_Functions {
 
     /**
      * Include required frontend files.
+     *
+     * @since 1.1.0
      */
     public function includes() {
 

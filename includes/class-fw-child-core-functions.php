@@ -1,12 +1,23 @@
 <?php
 /**
- * This file provides functions for the frontend and backend.
+ * This file is invoked when both the frontend and backend is viewed.
  *
+ * @package    FreshWeb_Church
+ * @subpackage Functions
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
  */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class wrapper for all methods.
+ *
+ * @since 1.1.0
+ */
 class FW_Child_Core_Functions {
 
     function __construct() {
@@ -19,6 +30,8 @@ class FW_Child_Core_Functions {
 
     /**
      * Add our favicons to the head of both the front and backend.
+     *
+     * @since  1.1.0
      */
     public function add_favicons() {
         
@@ -32,4 +45,3 @@ class FW_Child_Core_Functions {
     }
 
 }
-?>

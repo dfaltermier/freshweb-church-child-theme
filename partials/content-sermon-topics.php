@@ -1,4 +1,17 @@
 <?php
+/**
+ * Displays a list of sermon topics
+ *
+ * WordPress loads this partial file with a url similar to:
+ *     http://your-church-domain/sermons/topics/
+ *
+ * @package    FreshWeb_Church
+ * @subpackage Partial
+ * @copyright  Copyright (c) 2017, freshwebstudio.com
+ * @link       https://freshwebstudio.com
+ * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @since      1.1.0
+ */
 
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
