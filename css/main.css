@@ -69,11 +69,12 @@ h6:last-child {
 }
 
 /* Let's remove the "I Disagree" cancellation button */
-#popuppress-944 #pps-btn-disagree {
+#popuppress-944 .pps-disclaimer-disagree {
     display: none;
+    margin: 15px 0 0;
 }
 /* Change the "I Agree" button styling to match our theme */
-#popuppress-944 #pps-btn-agree {
+#popuppress-944 .pps-disclaimer-agree {
     border: 1px solid #61bf4c;
     border-radius: 4px;
     -moz-border-radius: 4px;
@@ -82,12 +83,12 @@ h6:last-child {
     font-weight: 600;
     margin-right: 0;
 }
-#popuppress-944 #pps-btn-agree:hover {
+#popuppress-944 .pps-disclaimer-agree:hover {
     background-color: #8cd756;
     border: 1px solid #8cd756;
 }
 /* Remove the checkmark icon to the left */
-#popuppress-944 #pps-btn-agree::before {
+#popuppress-944 .pps-disclaimer-agree::before {
     display: none;
 }
 
@@ -187,6 +188,16 @@ body .gform_wrapper input[type="submit"]:hover {
 /************************************************
  * Global page styling
  ************************************************/
+/**************
+ * Menu
+ **************/
+/* When a page is viewed, the active menu options leading to the page should be green. */
+nav.main_menu > ul > li.active > a.current,
+nav.main_menu .second ul li.current-menu-item > a,
+nav.main_menu ul li > a:hover {
+    color: #61bf4c !important; /* green */
+}
+
 /**************
  * Mobile menu
  **************/
@@ -411,7 +422,7 @@ div.child-home-meet-the-pastor h2 {
 /* Move the text block to the right a bit for easy reading. */
 .child-coming-events-listing .eventon_events_list .eventon_list_event .hasFtIMG .evcal_desc,
 .child-coming-events-listing #evcal_list .eventon_list_event a.sin_val.hasFtIMG .evcal_desc {
-    padding-left: 130px;
+    /* padding-left: 130px; */
 }
 
 /*

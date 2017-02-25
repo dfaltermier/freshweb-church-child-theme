@@ -382,6 +382,9 @@
     width: 100%;
 }
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-name {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6em;
     text-align: center;
 }
 .fw-child-sermon-speakers .fw-child-sermon-speaker-entry-speaker-link {
