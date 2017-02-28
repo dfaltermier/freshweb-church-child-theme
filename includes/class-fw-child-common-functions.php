@@ -29,6 +29,47 @@ class FW_Child_Common_Functions {
     function __construct() { }
 
     /**
+     * Returns true if the FreshWeb Studio Sermons plugin is activated.
+     *
+     * Use this method before attempting to display any Sermon-specific pages.
+     * This will eliminate broken pages when the plugin is not activated.
+     *
+     * FW_SERMONS_IS_ACTIVATED is globally defined in the plugin just for
+     * this detection purpose.
+     *
+     * @since  1.1.0
+     * @return bool   True if plugin is installed.
+     */
+    public static function is_sermons_plugin_activated() {
+
+        return defined( 'FW_SERMONS_IS_ACTIVATED' ) ? FW_SERMONS_IS_ACTIVATED : false;
+
+    }
+
+    /**
+     * Redirects user to the home page if the FreshWeb Studio Sermons
+     * plugin is not activated.
+     *
+     * @since  1.1.0
+     */
+    public static function redirect_if_sermons_not_activated() {
+
+        if ( ! self::is_sermons_plugin_activated() ) {
+
+            /*
+             * A 302 termpoary redirect will keep browsers checking for the sermons
+             * page when they come back online.
+             */
+            $http_status_code = 302;
+            $location = home_url();
+
+            wp_safe_redirect( $location, $http_status_code );
+
+        }
+
+    }
+
+    /**
      * Wrap a template part.
      *
      * This is a wrapper around the WordPress get_template_part() function.

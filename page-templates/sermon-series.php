@@ -19,6 +19,9 @@
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Redirect user to home page if the FreshWeb Studio Sermons plugin is not activated.
+FW_Child_Common_Functions::redirect_if_sermons_not_activated();
+
 /**
  * Returns the text used in the header of this page. This text overlays the background
  * header image. This method is called via an apply_filter() from the method referenced
