@@ -76,14 +76,6 @@ class FW_Child_Front_Functions {
                 true
             );
 
-            wp_enqueue_script(
-                'fw-child-theme-pullout-content-fix-js', 
-                FW_CHILD_THEME_JS_URI . '/pullout-content-fix.js', 
-                array( 'jquery' ),
-                FW_CHILD_THEME_VERSION,
-                true
-            );
-
             // Enqueue a client-specific stylesheet if one exists.
             if ( defined( 'FW_CHILD_CLIENT_CSS_FILE_PATH' ) &&
                  defined( 'FW_CHILD_CLIENT_CSS_FILE_URI' ) ) {
