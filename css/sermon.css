@@ -14,6 +14,18 @@
 }
 
 /*******************************
+ * Sermon Page Header
+ * This is the heading banner that has a background image with heading text overlayed on it.
+ ******************************/
+/* 
+ * Adding this class will insert the header background image for sermon pages. You can 
+ * manually do the same thing by inserting an image in Visual Composer. 
+ */
+.fw-child-sermon-page-header-background {
+    background-image: url("/wp-content/themes/bridge-child/images/header.1732x500-min.jpg");
+}
+
+/*******************************
  * Sermon Listing Page
  ******************************/
 /* Sermon page container */

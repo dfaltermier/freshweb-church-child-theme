@@ -100,6 +100,14 @@ h6:last-child {
     font-weight: 600;
 }
 
+/* 
+ * This will prevent the photo contained in the pullout from flashing on screen
+ * as the page loads. See accompanying JS file.
+ */
+#pullout-1 img {
+    display: none;
+}
+
 /**************
  * Plugin: AccessPress Social Icons
  **************/
@@ -225,7 +233,7 @@ nav.mobile_menu ul li.has_sub h3 {
 
 /* 
  * Page header
- * These are heading banners that have a background image with headings overlayed on them.
+ * This is the heading banner that has a background image with heading text overlayed on it.
  */
 /* Adding this class will insert the header background image. You can manually do the
  * same thing by inserting an image in Visual Composer. */
@@ -454,6 +462,10 @@ div.child-home-meet-the-pastor h2 {
 /**************
  * About: Leadership Team page
  **************/
+/* Space the leader's name, title, phone, etc. */
+.child-leadership-page-leader-details {
+    text-align: left;
+}
 /* Space the leader's name, title, phone, etc. */
 .child-leadership-page-leader-heading h4,
 .child-leadership-page-leader-heading h5,
@@ -758,6 +770,14 @@ body.error404 .title_subtitle_holder {
 
     section.parallax_section_holder {
         min-height: inherit !important;
+    }
+
+    /**************
+     * About: Leadership Team page
+     **************/
+    /* Space the leader's name, title, phone, etc. */
+    .child-leadership-page-leader-details {
+        text-align: center;
     }
     
 }

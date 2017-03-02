@@ -26,7 +26,31 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class FW_Child_Common_Functions {
 
-    function __construct() { }
+    /**
+     * Define how long we want our sermon excerpt to be in number of words.
+     *
+     * @since 1.1.0
+     */
+    const SERMON_EXCERPT_LENGTH = 70;
+
+    function __construct() {
+
+        // Set our own excerpt length.
+        add_filter( 'excerpt_length', array( $this, 'set_excerpt_length' ), 2000 );
+
+    }
+
+    /**
+     * Return how long we want our sermon excerpts to be in number of words.
+     *
+     * @since  1.1.0
+     * @return int   Number of words.
+     */
+    public function set_excerpt_length( $length ) {
+
+        return self::SERMON_EXCERPT_LENGTH;
+
+    }
 
     /**
      * Returns true if the FreshWeb Studio Sermons plugin is activated.
@@ -137,24 +161,6 @@ class FW_Child_Common_Functions {
         $excerpt = isset( $excerpt ) ? $excerpt : get_the_excerpt();
         $excerpt = wp_strip_all_tags( $excerpt );
         $excerpt = wptexturize( $excerpt );
-        return $excerpt;
-
-    }
-
-    /**
-     * Returns the given excerpt cleaned, sanitized and trimmed to the given
-     * number of words.
-     *
-     * @since  1.1.0
-     * @param  string  $excerpt          Optional. Post or page excerpt. Default: current post excerpt.
-     * @param  int     $number_of_words  Optional. Truncate excerpt to this length in words.
-     * @return string                    Excerpt.
-     */
-    public static function get_trimmed_excerpt( $excerpt = null , $number_of_words = 55 ) {
-
-        $excerpt = isset( $excerpt ) ? $excerpt : get_the_excerpt();
-        $excerpt = self::get_the_excerpt( $excerpt );
-        $excerpt = wp_trim_words( $excerpt, $number_of_words );
         return $excerpt;
 
     }

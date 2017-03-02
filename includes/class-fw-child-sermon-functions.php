@@ -98,7 +98,7 @@ class FW_Child_Sermon_Functions {
     public static function get_sermon_header_banner_data() {
 
         return apply_filters( 'fw_child_sermon_header_banner_data', array(
-            'class'    => 'child-page-header-background',
+            'class'    => 'fw-child-sermon-page-header-background',
             'title'    => 'Sermons',
             'subtitle' => 'Our church messages'
         ) );

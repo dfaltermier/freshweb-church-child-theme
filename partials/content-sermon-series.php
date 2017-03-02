@@ -71,7 +71,13 @@ $date_format = get_option( 'date_format' );
 
                     <?php if ( isset( $sermon_series_object->description ) ) : ?>
 
-                        <div class="fw-child-sermon-series-entry-excerpt"><?php echo FW_Child_Common_Functions::get_trimmed_excerpt( $sermon_series_object->description ); ?></div>
+                        <?php
+                            $excerpt = $sermon_series_object->description;
+                            $excerpt = FW_Child_Common_Functions::get_the_excerpt( $excerpt );
+                            $excerpt = wp_trim_words( $excerpt, FW_Child_Common_Functions::SERMON_EXCERPT_LENGTH );
+                        ?>
+
+                        <div class="fw-child-sermon-series-entry-excerpt"><?php echo $excerpt; ?></div>
 
                     <?php endif; ?>
 

@@ -76,6 +76,14 @@ class FW_Child_Front_Functions {
                 true
             );
 
+            wp_enqueue_script(
+                'fw-child-theme-pullout-content-fix-js', 
+                FW_CHILD_THEME_JS_URI . '/pullout-content-fix.js', 
+                array( 'jquery' ),
+                FW_CHILD_THEME_VERSION,
+                true
+            );
+
             // Enqueue a client-specific stylesheet if one exists.
             if ( defined( 'FW_CHILD_CLIENT_CSS_FILE_PATH' ) &&
                  defined( 'FW_CHILD_CLIENT_CSS_FILE_URI' ) ) {
@@ -104,12 +112,9 @@ class FW_Child_Front_Functions {
      */
     public function includes() {
 
-        // Theme shortcodes.
-        locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-shortcodes.php', true );
-        $shortcodes = new FW_Child_Shortcodes();
-
         // Common helper functions.
         locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-common-functions.php', true );
+        $common = new FW_Child_Common_Functions();
 
         // Sermon helper functions.
         locate_template( FW_CHILD_THEME_INCLUDES_DIR . '/class-fw-child-sermon-functions.php', true );

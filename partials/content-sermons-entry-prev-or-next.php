@@ -34,8 +34,7 @@ $series   = get_the_term_list( $sermon_post->ID, 'sermon_series',  '', ', ' );
 $books    = get_the_term_list( $sermon_post->ID, 'sermon_book',    '', ', ' );
 
 $excerpt = $sermon_post->post_excerpt;
-$excerpt = wp_strip_all_tags( $excerpt );
-$excerpt = wptexturize( $excerpt );
+$excerpt = FW_Child_Common_Functions::get_the_excerpt( $excerpt );
 
 $date_format = get_option( 'date_format' );
 $date_string = date( $date_format, strtotime( $sermon_post->post_date ) );
