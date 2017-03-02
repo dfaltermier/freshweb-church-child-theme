@@ -15,10 +15,12 @@
 
         // Delauy 2 seconds before making the pullout image visible.
         // See stylesheet for initial setting of display:none.
+        /*
         setTimeout(function() {
-            var image = $('img', '#pullout-1').css( {'display': 'block'} );
+            var image = $('#pullout-1').css( {'display': 'block'} );
         },
-        2000); // Two seconds seems an okay delay.
+        5000); // Two seconds seems an okay delay.
+        */
 
     });
 

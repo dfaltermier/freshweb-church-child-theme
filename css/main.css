@@ -102,10 +102,11 @@ h6:last-child {
 
 /* 
  * This will prevent the photo contained in the pullout from flashing on screen
- * as the page loads. See accompanying JS file.
+ * as the page loads. In the pullout widget code, we set the containing <div> to 
+ * display:none. We reverse the effects here.
  */
-#pullout-1 img {
-    display: none;
+#pullout-1 .child-pullout-content {
+    display: block !important;
 }
 
 /**************
