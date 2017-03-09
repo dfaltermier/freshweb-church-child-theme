@@ -663,93 +663,105 @@ class FW_Child_Sermon_Functions {
     }
 
     /**
-     *  Build and return an $archives lookup table, sorted by year in descending order.
-     *
-     *  Returns:
-     *    $archives = array(
-     *       '2016' => array(
-     *            'month  => 'November',
-     *            'count' => 2,
-     *            'url'   => 'http...'
-     *       ),
-     *       ...
-     *    );
+     * Filter callback used to modify the SELECT portion of the sql query for get_sermons_by_date().
      *
      * @since  1.1.0
-     * @return array Sermon data. See data structure below.
+     *
+     * @param  string $sql  SELECT portion of default sql statement.
+     * @return string       Modified $sql.
      */
-    public static function get_sermon_archives() {
+    public static function filter_sermons_by_date( $sql ) {
 
-       $archives = array();
-       $matches  = array();
+        global $wpdb;
+        
+        $post_table = $wpdb->prefix . 'posts';
 
-      /*
-       * Get string containing list of archive dates. Example:
-        *  '<li><a href='http://church.freshwebstudio.com/2016/10/?post_type=sermon'>October 2016</a>&nbsp;(3)</li>
-        *   <li><a href='http://church.freshwebstudio.com/2016/07/?post_type=sermon'>July 2016</a>&nbsp;(1)</li>
-        *   <li><a href='http://church.freshwebstudio.com/2015/12/?post_type=sermon'>December 2015</a>&nbsp;(1)</li>'
-       */
-        $args = array(
-            'post_type'       => 'sermon',
-            'type'            => 'monthly',
-            'echo'            => false,
-            'show_post_count' => true,
-            'format'          => 'html',
-            'order'           => 'DESC'
-        );
-        $links = wp_get_archives( $args );
+        $my_sql = 
+            $post_table . '.ID, ' .
+            $post_table . '.post_title, ' .
+            $post_table . '.post_name, '  .  // Needed to create permalink
+            $post_table . '.post_date';
 
-        if ( empty( $links ) ) {
-            return $archives;
-        }
+        return $my_sql;
+
+    }
+
+    /**
+     * Returns a list of sermons grouped by month number for the given year.
+     *
+     * Data structure returned:
+     *     $months = array(
+     *         '1' => array(
+     *             'ID'             => get_the_ID(),
+     *             'post_date'      => get_the_date( get_option( 'date_format' ) ),
+     *             'post_title'     => get_the_title(),
+     *             'post_permalink' => get_permalink()
+     *         ),
+     *         ...
+     *     );
+     *
+     * @since  1.1.0
+     *
+     * @param  string    $year   Optional. e.g.: '2017'. Default: current year.
+     * @return array             Sermons
+     */
+    public static function get_sermons_by_date( $year = '' ) {
+
+        // Use the current year by default.
+        $year = empty( $year ) ? date( 'Y' ) : $year; 
+
+        // Map our months to a list of sermons associated for that month.
+        $months = array();
 
         /*
-         * Let's split our $links string into an array of date strings.
-         *  array(
-         * '<li><a href='http://church.freshwebstudio.com/2016/10/?post_type=sermon'>October 2016</a>&nbsp;(3)',
-         *  '<li><a href='http://church.freshwebstudio.com/2016/07/?post_type=sermon'>July 2016</a>&nbsp;(1)',
-         *  '<li><a href='http://church.freshwebstudio.com/2015/12/?post_type=sermon'>December 2015</a>&nbsp;(1)</li>'
-         * )
+         * Fetch all sermons from the database. Retrieve only those fields that we need
+         * by applying a filter that modifies the SELECT statement.
          */
-        $links = preg_split( "/<\/li>\s+/", trim( $links ) );
+        add_filter( 'posts_fields', array( 'FW_Child_Sermon_Functions', 'filter_sermons_by_date' ) );
 
-        if ( $links === false ) { // Abandon ship
-            return $archives;
-        }
+        $args = array(
+           'post_type'  => 'sermon',
+           'nopaging'   => true,          // Fetch all sermons
+           'order'      => 'ASC',         // Jan, Feb, Mar,...
+           'date_query' => array(
+                array( 'year' => $year )  // Fetch only the given year's worth of sermons.
+            )
+        );
 
-        foreach( $links as $link ) {
-            preg_match( "/^<li><a href='(.+)'>(.+)\s(.+)<\/a>&nbsp;\((\d+)\).*$/", $link, $matches );
+        $query = new WP_Query( $args );
 
-            $url   = $matches[1];
-            $month = $matches[2];
-            $year  = $matches[3];
-            $count = $matches[4];
-            
-            // Create a structure containing our month data parsed from the link
-            $month_data = array(
-                'month' => $month,
-                'count' => $count,
-                'url'   => $url
-            );
+        // Remove our filter to be clean for later queries.
+        remove_filter( 'posts_fields', array( 'FW_Child_Sermon_Functions', 'filter_sermons_by_date' ) );
 
-            // If we haven't created an entry for our $year yet, do so.
-            // Otherwise, push our month data onto the list for the existing $year. 
-            if ( empty( $archives[$year] ) ) {
-                $archives[$year] = array( $month_data );
+        if ( $query->have_posts() ) {
+
+            while ( $query->have_posts() ) {
+
+                $query->the_post();
+
+                $sermon = array(
+                    'ID'             => get_the_ID(),
+                    'post_date'      => get_the_date( get_option( 'date_format' ) ),
+                    'post_title'     => get_the_title(),
+                    'post_permalink' => get_permalink()
+                );
+
+                // The month number will be the index to our $months array.
+                $month_index = get_the_date( 'n' ); // '1' for January, etc.
+
+                if ( empty( $months[$month_index] ) ) {
+                    $months[$month_index] = array();
+                }
+                    
+                array_push( $months[$month_index], $sermon );
+
             }
-            else {
-                array_push( $archives[$year], $month_data );
-            }
 
-        }
+            wp_reset_postdata();
         
-        // Sort the sermon archives with months in calendar order
-        foreach( $archives as $year => $month_list ) {
-            usort( $month_list, 'self::sort_sermon_archives_by_month' );
-            $archives[$year] = $month_list;
         }
 
-        return $archives;
+        return $months;
 
     }
 
@@ -885,6 +897,106 @@ class FW_Child_Sermon_Functions {
     public static function is_player_audio() {
     
         return ( ! empty( $_GET['player'] ) && ('audio' === $_GET['player'] ) ) ? true : false;
+
+    }
+
+    /**
+     * Return the url of the current page.
+     *
+     * @since  1.1.0
+     * @global $wp
+     *
+     * @return string    Url of current page minus any query params.
+     */
+    public static function get_current_page_url() {
+    
+        global $wp;
+
+        $url = home_url( $wp->request );
+        return $url;
+
+    }
+
+    /**
+     * Returns the navigation needed for the Sermon 'Browes Dates' page.
+     *
+     * Returns a string ready to be inserted between <ul> tags.
+     * 
+     * @since  1.1.0
+     * @global $wpdb
+     *
+     * @param  string   $active_year   The list item for this year will include a class 'fw-child-sermon-year-active'. 
+     * @return string                  Navigation string.
+     */
+    public static function get_sermon_year_navigation( $active_year ) {
+
+        global $wpdb;
+        $list = array();
+ 
+        $years = $wpdb->get_col( "SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'sermon' ORDER BY post_date ASC" );
+
+        foreach ( $years as $year ) {
+
+            $url = self::set_url_sermon_year( $year );
+
+            $class = ( $active_year === $year ) ? 'fw-child-sermon-year-active' : '';
+
+            array_push( 
+                $list, 
+                '<li><a href="' . $url . '" class="' . $class . '">' . $year . '</a></li>'
+            );
+
+        }
+
+        return join( '', $list );
+
+    }
+
+    /**
+     * Return the given url with the year query parameter appended.
+     *
+     * @since  1.1.0
+     *
+     * @param  string  $year  Four-digit year.
+     * @param  string  $url   Optional. Url. Uses current page url if not provided.
+     * @return string         Url.
+     */
+    public static function set_url_sermon_year( $year, $url = null ) {
+
+        $url = empty( $url ) ? self::get_current_page_url() : $url;
+
+        return add_query_arg( 'sermon_year', $year, $url );
+
+    }
+
+    /**
+     * Return the 'year' query parameter from the current sermon page url.
+     *
+     * @since  1.1.0
+     *
+     * @return string   Four-digit year or empty string.
+     */
+    public static function get_url_sermon_year() {
+    
+        return empty( $_GET['sermon_year'] ) ? '' : $_GET['sermon_year'];
+
+    }
+
+    /**
+     * Returns the url necessary to display the sermon archives for the given year/month.
+     *
+     * Returned format: http://your-church-domain/2016/10/?post_type=sermon
+     *
+     * @since  1.1.0
+     *
+     * @param  string  $year          Four digit year.
+     * @param  string  $month_number  e.g.: 1 through 12 (January - December).
+     * @return string                 Url.
+     */
+    public static function get_sermon_archive_dated_url( $year, $month_number ) {
+
+        $url = home_url() . '/' . $year . '/' . $month_number . '/?post_type=sermon';
+        return $url;
 
     }
 

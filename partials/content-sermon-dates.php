@@ -5,6 +5,10 @@
  * WordPress loads this partial file with a url similar to:
  *     http://your-church-domain/sermons/dates/
  *
+ * If the page url is given the following query paramter:
+ *     http://your-church-domain/sermons/dates/?sermon_year=2016
+ * Then we display the sermons for only the given year.
+ *
  * @package    FreshWeb_Church
  * @subpackage Partial
  * @copyright  Copyright (c) 2017, freshwebstudio.com
@@ -17,84 +21,108 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
- *  $archives = array(
- *     '2016' => array(
- *          'month  => 'November',
- *          'count' => 2,
- *          'url'   => 'http...'
- *     ),
- *      ...
- *  );
+ * Look into the url query for a year string. If given, then display the sermons
+ * for only this year. Otherwise, use the current year from today's date.
  */
-$archives = FW_Child_Sermon_Functions::get_sermon_archives();
-$number_of_years         = count( $archives ); // Total number of years in our archive list
-$number_of_years_counter = 0;
-$number_of_years_per_row = 2;
+$selected_year = FW_Child_Sermon_Functions::get_url_sermon_year();
+$selected_year = ! empty( $selected_year ) ? $selected_year : date( 'Y' );
+
+/*
+ * Get the list of years for ALL sermons. We'll use this list for our navigation.
+ *
+ * Returns string:
+ *    <li><a href="http://church.freshwebstudio.com/sermons/dates?sermon_year=2016" 
+ *           class="fw-child-sermon-year-active">2016</a></li>
+ *    <li><a href="http://church.freshwebstudio.com/sermons/dates?sermon_year=2017" 
+ *           class="">2017</a></li>
+ */
+$year_navigation = FW_Child_Sermon_Functions::get_sermon_year_navigation( $selected_year );
+
+/*
+ * Get the sermons for all months in the given year.
+ *
+ * Returns array:
+ *     $months = array(
+ *         '1' => array(
+ *             'ID'             => get_the_ID(),
+ *             'post_date'      => get_the_date( get_option( 'date_format' ) ),
+ *             'post_title'     => get_the_title(),
+ *             'post_permalink' => get_permalink()
+ *         ),
+ *         ...
+ *     );
+ */
+$months = FW_Child_Sermon_Functions::get_sermons_by_date( $selected_year );
+$sermon_counter = 0;
 
 ?>
 
 <div class="fw-child-sermon-archives fw-child-clearfix">
 
-    <?php 
-    if ( ! empty( $archives ) ) : ?>
+    <?php if ( ! empty( $months ) ) : ?>
 
-        <?php foreach ( $archives as $year => $month_list ) : ?>
+        <ul class="fw-child-sermon-archives-year-navigation">
+          
+            <?php echo $year_navigation; ?>
+            
+        </ul>
 
-            <?php $number_of_years_counter++; ?>
+        <div class="fw-child-sermon-archives-year-navigation-separator"></div>
+ 
+        <ul class="fw-child-sermon-archives-list">
 
-            <?php if ( ! empty( $month_list ) ) : ?>
-
-                <?php
-                // Start a new row every $number_of_years_per_row.
-                ?>
-                <?php if ( $number_of_years_counter % $number_of_years_per_row !== 0 ) : ?>
-                    <div class="fw-child-sermon-archives-row">
-                <?php endif; ?>
-
-                    <article class="fw-child-sermon-archives-container">
-
-                        <section class="fw-child-sermon-archives-header">
-                            <h2><?php echo $year; ?></h2>
-                        </section>
-
-                        <section class="fw-child-sermon-archives-body">
-                        
-                            <ul class="fw-child-sermon-archives-list">
-     
-                                <?php foreach ( $month_list as $month_data ) : ?>
-
-                                    <li class="fw-child-sermon-archives-item">
-                                        <div class="fw-child-sermon-archives-name">
-                                            <a href="<?php echo esc_url( $month_data['url'] ); ?>"><?php echo esc_html( $month_data['month'] ); ?></a>
-                                            <span class="fw-child-sermon-archives-count"><?php echo $month_data['count']; ?></span>
-                                        </div>
-                                    </li>
-
-                                <?php endforeach; ?>
-
-                            </ul>
-
-                        </section>
-
-                    </article>
+            <?php foreach ( $months as $month_number => $sermons ) : ?>
 
                 <?php
-                // Close the row if:
-                // 1. we have our number_of_years_per_row, or
-                // 2. we are at the end of our list of years (where the length may be odd)
+                // We must not leave any whitespace between the closing 'li' tag and the
+                // beginning of the next in order for the page flow to work with the set widths.
                 ?>
-                <?php if ( ( $number_of_years_counter % $number_of_years_per_row === 0 ) ||
-                           ( $number_of_years_counter >= $number_of_years ) ): ?>
-                    </div>
-                <?php endif; ?>
+                <?php if ( $sermon_counter > 0 ) { echo '</li>'; } ?><li class="fw-child-sermon-archives-entry">
 
-            <?php endif; ?>
+                <?php 
+                $sermon_counter++; 
+                $image_url = FW_CHILD_THEME_IMAGE_URI . '/sermon-season-' . $month_number . '-min.jpg';
+        
+                // Get the url to the sermon archive for the whole month.
+                $archive_url = FW_Child_Sermon_Functions::get_sermon_archive_dated_url( $selected_year, $month_number );
+                ?>
 
-        <?php endforeach; ?>
+                <div class="fw-child-sermon-archives-entry-image-container">
+                    <a href="<?php echo esc_url( $archive_url ); ?>"><img 
+                       src="<?php echo esc_url( $image_url ); ?>"
+                       alt="" /></a>
+                </div>
+
+                <?php foreach ( $sermons as $sermon ) : ?>
+
+                    <?php if ( ! empty( $sermon['post_title'] ) ) : ?>
+
+                        <div class="fw-child-sermon-archives-entry-title">
+                            <a href="<?php echo esc_url( $sermon['post_permalink'] ); ?>">
+                                <h2><?php echo esc_html( $sermon['post_title'] ); ?></h2>
+                            </a>
+                        </div>
+
+                    <?php endif; ?>
+
+                    <?php if ( ! empty( $sermon['post_date'] ) ) : ?>
+
+                        <div class="fw-child-sermon-archives-entry-date">
+                            <?php echo esc_html( $sermon['post_date'] ); ?>
+                        </div>
+
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
+            <?php endforeach; ?>
+
+            </li>
+        </ul>
 
     <?php else: ?>
 
-        <div class="fw-child-sermons-none">There are no sermon archives to display.</div>
+        <div class="fw-child-sermons-none">There are no sermon archives to display for <?php echo esc_html( $selected_year ); ?></div>
 
     <?php endif; ?>
 

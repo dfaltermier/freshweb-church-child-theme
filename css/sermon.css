@@ -466,58 +466,60 @@
 /*******************************
  * Sermon Archives (by Date)
  ******************************/
- /* Container box */
-.fw-child-sermon-archives .fw-child-sermon-archives-container {
-    display: inline-block;
-    width: 46.5%;
-    margin-bottom: 3.125em;
-    margin-right: 6%;
-    vertical-align: top;
-}
-.fw-child-sermon-archives .fw-child-sermon-archives-container:last-child {
-    margin-right: 0;
-}
-
-/* Header */
-.fw-child-sermon-archives .fw-child-sermon-archives-header {
-    background-color: #1c2122;
-    padding: 0.8em;
+.fw-child-sermon-archives .fw-child-sermon-archives-year-navigation {
+    margin: 0 0 10px;
+    list-style: none;
     text-align: center;
 }
-.fw-child-sermon-archives .fw-child-sermon-archives-header h2 {
-    color: #fff;
+.fw-child-sermon-archives .fw-child-sermon-archives-year-navigation li {
+    padding: 10px;
+    list-style: none;
+    display: inline-block;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-year-navigation li a {
+    font-size: 18px;
     font-weight: 500;
-    font-size: 1.2em;
-    line-height: 1.2em;
-    margin: 0;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-year-navigation li a.fw-child-sermon-year-active {
+    font-size: 26px;
+    font-weight: 500;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-year-navigation-separator {
+    border: 2px solid #8cd756;
+    border-radius: 2px;
+    margin: 1em auto;
+    width: 20%;
 }
 
-/* Body */
-.fw-child-sermon-archives .fw-child-sermon-archives-body {
-    background-color: #fff;
-    padding: 1.2em;
-}
 .fw-child-sermon-archives .fw-child-sermon-archives-list {
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
-    -moz-column-gap: 3.75em;
-    -webkit-column-gap: 3.75em;
-    column-gap: 3.75em;
+    margin-top: 40px;
 }
-.fw-child-sermon-archives .fw-child-sermon-archives-item {
-    padding-right: 1.875em;
-    position: relative;
-    list-style: none;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
+.fw-child-sermon-archives .fw-child-sermon-archives-entry {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 40px;
+    padding: 0 20px;
+    vertical-align: top;
+    width: 24.99%;
 }
-.fw-child-sermon-archives .fw-child-sermon-archives-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-style: normal;
+.fw-child-sermon-archives .fw-child-sermon-archives-entry-image-container {
+    text-align: center;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-entry-image {
+    width: 100%;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-entry-title h2 {
+    color: #61bf4c;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6em;
+    margin: 18px 0 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+.fw-child-sermon-archives .fw-child-sermon-archives-entry-date {
+    line-height: 18px;
+    text-align: center;
 }
 
 /*******************************
@@ -739,6 +741,13 @@
         width: 49.5%;
     }
 
+    /*******************************
+     * Sermon Archives (by date)
+     ******************************/
+    .fw-child-sermon-archives .fw-child-sermon-archives-entry {
+        width: 33.3%;
+    }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -797,10 +806,8 @@
     /*******************************
      * Sermon Archives (by date)
      ******************************/
-    .fw-child-sermon-archives .fw-child-sermon-archives-list {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
+    .fw-child-sermon-archives .fw-child-sermon-archives-entry {
+        width: 49.5%;
     }
 
     /*******************************
@@ -849,16 +856,7 @@
     /*******************************
      * Sermon Archives (by date)
      ******************************/
-    .fw-child-sermon-archives .fw-child-sermon-archives-list {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
-    }
-
-    /* Container box */
-    .fw-child-sermon-archives .fw-child-sermon-archives-container {
-        margin-right: 0;        
+    .fw-child-sermon-archives .fw-child-sermon-archives-entry {
         width: 100%;
     }
-
 }
