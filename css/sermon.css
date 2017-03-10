@@ -412,7 +412,7 @@
 .fw-child-sermon-books .fw-child-sermon-books-container {
     display: inline-block;
     width: 46.5%;
-    margin-bottom: 3.125em;
+    margin-bottom: 2em;
     margin-right: 6%;
     vertical-align: top;
 }
@@ -422,22 +422,24 @@
 
 /* Header */
 .fw-child-sermon-books .fw-child-sermon-books-header {
-    background-color: #1c2122;
-    padding: 0.8em;
     text-align: center;
 }
 .fw-child-sermon-books .fw-child-sermon-books-header h2 {
-    color: #fff;
     font-weight: 500;
-    font-size: 1.2em;
-    line-height: 1.2em;
+    font-size: 26px;
+    line-height: 38px;
     margin: 0;
+}
+.fw-child-sermon-books .fw-child-sermon-books-separator {
+    border: 3px solid #8cd756;
+    border-radius: 3px;
+    margin: 1em auto;
+    max-width: 100%;
 }
 
 /* Body */
 .fw-child-sermon-books .fw-child-sermon-books-body {
-    background-color: #fff;
-    padding: 1.2em;
+    padding: 0 1.2em 1.2em;
 }
 .fw-child-sermon-books .fw-child-sermon-books-list {
     -moz-column-count: 2;
@@ -448,6 +450,7 @@
     column-gap: 3.75em;
 }
 .fw-child-sermon-books .fw-child-sermon-book-item {
+    font-size: 18px;
     padding-right: 1.875em;
     position: relative;
     list-style: none;
@@ -484,10 +487,10 @@
     font-weight: 500;
 }
 .fw-child-sermon-archives .fw-child-sermon-archives-year-navigation-separator {
-    border: 2px solid #8cd756;
-    border-radius: 2px;
+    border: 3px solid #8cd756;
+    border-radius: 3px;
     margin: 1em auto;
-    width: 20%;
+    width: 40%;
 }
 
 .fw-child-sermon-archives .fw-child-sermon-archives-list {

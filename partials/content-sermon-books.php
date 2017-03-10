@@ -52,7 +52,7 @@ $number_of_blocks_per_row = 2;
                         </section>
 
                         <section class="fw-child-sermon-books-body">
-                        
+                            <div class="fw-child-sermon-books-separator"></div>
                             <ul class="fw-child-sermon-books-list">
      
                                 <?php foreach ( $sermon_books['book_terms'] as $book_term ) : ?>
