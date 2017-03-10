@@ -16,20 +16,16 @@
 // No direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Get topics
-$topics = wp_list_categories( array(
+$topics = get_categories( array(
     'taxonomy'         => 'sermon_topic',
+    'hide_empty'       => true,
     'hierarchical'     => true,
-    'show_option_none' => '', // Don't return the default 'No Categories' message when empty.
-    'pad_counts'       => true,
-    'show_count'       => true,
-    'title_li'         => '',
-    'echo'             => false
+    'pad_counts'       => false   // Was true
 ) );
 
 // Manually replace the parentheses around the count.
-$topics = str_replace( '(', '<span class="fw-child-sermon-topic-count">', $topics );
-$topics = str_replace( ')', '</span>', $topics );
+$topics = str_replace( '(', '<div class="fw-child-sermon-topic-count-wrapper"><div class="fw-child-sermon-topic-count">', $topics );
+$topics = str_replace( ')', '</div></div>', $topics );
 
 ?>
 
@@ -38,7 +34,20 @@ $topics = str_replace( ')', '</span>', $topics );
     <?php if ( ! empty( $topics ) ) : ?>
 
         <ul class="fw-child-sermon-topics-list">
-            <?php echo $topics; ?>
+
+            <?php foreach ( $topics as $topic ) : ?>
+                <?php $category_count = get_category_link( $topic->term_id ); ?>
+
+                <li>
+                    <a href="<?php echo esc_url( $category_count ); ?>" >
+                        <span class="fw-child-sermon-topics-name"><?php echo $topic->name; ?></span>
+                        <div class="fw-child-sermon-topic-count-wrapper">
+                            <span class="fw-child-sermon-topic-count"><?php echo esc_html( $topic->count ); ?></span>
+                        </div>
+                    </a>
+                </li>
+
+            <?php endforeach; ?>
         </ul>
  
     <?php else: ?>

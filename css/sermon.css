@@ -335,42 +335,41 @@
     margin-bottom: 40px;
 }
 .fw-child-sermon-topics .fw-child-sermon-topics-list {
-    -moz-column-count: 3;
-    -webkit-column-count: 3;
-    column-count: 3;
-    -moz-column-gap: 6.25em;
-    -webkit-column-gap: 6.25em;
-    column-gap: 6.25em;
-    margin-bottom: -1.25em !important;
-    line-height: 1.3;
+    margin: 0 0 10px;
+    list-style: none;
+    text-align: center;
 }
-.fw-child-sermon-topics .fw-child-sermon-topics-list > li {
-    padding-right: 1.50em;
+.fw-child-sermon-topics .fw-child-sermon-topics-list li {
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
+    display: inline-block;
     list-style: none;
+    padding: 0 20px;
     position: relative;
-}
-.fw-child-sermon-topics .fw-child-sermon-topics-list ul {
-    margin-left: 0;
-    margin-top: 0;
-}
-.fw-child-sermon-topics .fw-child-sermon-topics-list li li {
-    list-style: none;
-    position: relative;
+    text-align: center;
+    margin: 0 0 30px;
+    vertical-align: bottom;
+    width: 115px;
 }
 .fw-child-sermon-topics .fw-child-sermon-topics-list a {
-    display: inline-block;
-    padding-bottom: 0.5em;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6em;
+    display: block;
+}
+.fw-child-sermon-topics .fw-child-sermon-topic-count-wrapper {
+    background-image: url("../images/sermon-circle-count.104x122-min.png");
+    display: block;
+    height: 122px;
+    margin: 0 auto;
+    width: 104px;
 }
 .fw-child-sermon-topics .fw-child-sermon-topic-count {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-.fw-child-sermon-topics li li .fw-child-sermon-topic-count {
-    right: -1.5em;
+    color: #fff;
+    font-size: 30px;
+    line-height: 127px;
+    position: relative;
 }
 
 /*******************************
@@ -779,15 +778,6 @@
     }
 
     /*******************************
-     * Sermon Topics
-     ******************************/
-    .fw-child-sermon-topics .fw-child-sermon-topics-list {
-        -moz-column-count: 2;
-        -webkit-column-count: 2;
-        column-count: 2;
-    }
-
-    /*******************************
      * Sermon Speakers
      ******************************/
     .fw-child-sermon-speakers .fw-child-sermon-speaker-entry {
@@ -821,15 +811,6 @@
 }
 
 @media only screen and (max-width: 480px) {
-
-    /*******************************
-     * Sermon Topics
-     ******************************/
-    .fw-child-sermon-topics .fw-child-sermon-topics-list {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
-    }
 
     /*******************************
      * Sermon Speakers
