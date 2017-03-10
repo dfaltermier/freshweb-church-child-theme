@@ -354,7 +354,6 @@
 }
 .fw-child-sermon-topics .fw-child-sermon-topics-list a {
     font-size: 18px;
-    font-weight: 500;
     line-height: 1.6em;
     display: block;
 }
@@ -484,7 +483,6 @@
 }
 .fw-child-sermon-archives .fw-child-sermon-archives-year-navigation li a.fw-child-sermon-year-active {
     font-size: 26px;
-    font-weight: 500;
 }
 .fw-child-sermon-archives .fw-child-sermon-archives-year-navigation-separator {
     border: 3px solid #8cd756;
@@ -513,14 +511,13 @@
 .fw-child-sermon-archives .fw-child-sermon-archives-entry-title h2 {
     color: #61bf4c;
     font-size: 18px;
-    font-weight: 500;
-    line-height: 1.6em;
+    font-weight: 400;
+    line-height: 1.4em;
     margin: 18px 0 0;
     text-align: center;
     text-transform: capitalize;
 }
 .fw-child-sermon-archives .fw-child-sermon-archives-entry-date {
-    line-height: 18px;
     text-align: center;
 }
 
