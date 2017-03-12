@@ -9,7 +9,7 @@ This theme must be installed as a child theme to the [Bridge WordPress parent th
 
 ## Required Plugins
 
-This theme requires the [FreshWeb Sermons plugin](https://github.com/dfaltermier/freshweb-sermons). This plugin provides the means by which sermons (custom post type) are created and managed on the WordPress backend. Our child theme displays these sermons. You can see the sermons implementated from the 'Sermoms' menu option on the [church demo website](http://church.freshwebstudio.com/sermons).
+This theme requires the [FreshWeb Sermons plugin](https://github.com/dfaltermier/freshweb-sermons). This plugin provides the means by which sermons (custom post type) are created and managed on the WordPress backend. Our child theme displays these sermons. You can see the sermons implementated from the 'Sermons' menu option on the [church demo website](http://church.freshwebstudio.com/sermons).
 
 ## Screenshot(s)
 
