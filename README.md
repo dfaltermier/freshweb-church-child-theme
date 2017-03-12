@@ -3,6 +3,8 @@
 This child theme is built specifically for use by FreshWeb Studio. It is used to build a church website for small and mid-sized churches who can't afford a custom-built website. 
 If you wish to see this child theme in action, visit our [church demo website](http://church.freshwebstudio.com/). The demo site is used as a template for each church where the demo content is substituted with content from the church [client].
 
+## Required Parent Theme
+
 This theme must be installed as a child theme to the [Bridge WordPress parent theme](https://themeforest.net/item/bridge-creative-multipurpose-wordpress-theme/7315054).
 
 ## Required Plugins
