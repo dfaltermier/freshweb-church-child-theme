@@ -1,8 +1,10 @@
 /*
  * Main stylesheet. Theme modifications should be done here instead of the parent theme.
- */
-
-/*
+ *
+ * Note: Prefix all styles with 'fw-child-' so we don't override any parent styles accidentally.
+ * You'll notice that in this file, the older practice of using 'child-' is still used. Please 
+ * use 'fw-child' from now on.
+ *
  * Table of Contents:
  *   o Override default styles from parent stylesheet
  *   o Global styles
@@ -56,10 +58,10 @@ h6:last-child {
 /************************************************
  * Global plugin styling
  ************************************************/
-/**************
+/****************************
  * Plugin: Popup Press
  * Welcome Popup (only for demo site)
- **************/
+ ****************************/
 /* Style the background */
 #popuppress-944 .pps-wrap {
     background-color: #f7f7f7;
@@ -92,10 +94,10 @@ h6:last-child {
     display: none;
 }
 
-/*
+/****************************
  * Plugin: Pullout Widgets
  * Pullout on right side of page (only for demo site)
- */
+ ****************************/
 #pullouts .pullout-button span {
     font-weight: 600;
 }
@@ -109,17 +111,17 @@ h6:last-child {
     display: block !important;
 }
 
-/**************
+/****************************
  * Plugin: AccessPress Social Icons
- **************/
+ ****************************/
 /* The tooltip for the social icons need to be enlarged. */
 .aps-each-icon .aps-icon-tooltip {
     font-size: 14px;
 }
 
-/**************
+/****************************
  * Plugin: Gravity Forms
- **************/
+ ****************************/
 .gform_wrapper {
     margin-bottom: 0 !important;
 }
@@ -154,9 +156,9 @@ body .gform_wrapper input[type="submit"]:hover {
     background-color: #8cd756 !important;
 }
 
-/**************
+/****************************
  * Plugin: Shortcodes Ultimate
- **************/
+ ****************************/
 /*
  * Accordion Effect for All Pages
  */
@@ -185,9 +187,9 @@ body .gform_wrapper input[type="submit"]:hover {
     padding: 1em;
 }
 
-/**************
+/****************************
  * Plugin: Dropcaps
- **************/
+ ****************************/
 /* Decrease font size. */
 .wpsdc-drop-cap {
     padding: 0.3em 0.07em 0.25em 0 !important;
@@ -197,9 +199,9 @@ body .gform_wrapper input[type="submit"]:hover {
 /************************************************
  * Global page styling
  ************************************************/
-/**************
+/****************************
  * Menu
- **************/
+ ****************************/
 /* When a page is viewed, the active menu options leading to the page should be green. */
 nav.main_menu > ul > li.active > a.current,
 nav.main_menu .second ul li.current-menu-item > a,
@@ -207,17 +209,17 @@ nav.main_menu ul li > a:hover {
     color: #61bf4c !important; /* green */
 }
 
-/**************
+/****************************
  * Mobile menu
- **************/
+ ****************************/
 /* For those menu options that contain sub-menus, change the cursor from an 'I' to an arrow. */
 nav.mobile_menu ul li.has_sub h3 {
     cursor: default;
 }
 
-/**************
+/****************************
  * Header
- **************/
+ ****************************/
 /*
  * Page header banner with foreground image.
  * These are heading banners that contain only an image.
@@ -298,9 +300,9 @@ nav.mobile_menu ul li.has_sub h3 {
     text-stroke-width: 1px;
 }
 
-/**************
+/****************************
  * Footer
- **************/
+ ****************************/
 /*
  * Top footer
  */
@@ -406,9 +408,9 @@ nav.mobile_menu ul li.has_sub h3 {
 /************************************************
  * Specific page styling
  ************************************************/
-/**************
+/****************************
  * Home page
- **************/
+ ****************************/
 /* Meet the Pastor banner */
 div.child-home-meet-the-pastor {
     background-position: top center !important;
@@ -417,10 +419,10 @@ div.child-home-meet-the-pastor h2 {
     margin: 0.1em;
 } 
 
-/*
+/****************************
  * Event section
  * EventOn Plugin: Event Listings Addon
- */
+ ****************************/
 /* Remove:
  * 1. the space saved for the calendar header, and
  * 2. the "loadbar" section above the calendar */
@@ -434,9 +436,9 @@ div.child-home-meet-the-pastor h2 {
     /* padding-left: 130px; */
 }
 
-/*
+/****************************
  * Latest News section
- */
+ ****************************/
 /* Let's make the headings look similar to the "Coming Events" block */
 .child-latest-news-listing h5 a {
     color: #6B6B6B;
@@ -449,9 +451,9 @@ div.child-home-meet-the-pastor h2 {
     margin: 0 !important;
 }
 
-/*
+/****************************
  * Common to both Event section and News section
- */
+ ****************************/
 /* Style links next to headings */
 .child-latest-news-listing h3 a,
 .child-coming-events-listing h3 a {
@@ -460,9 +462,9 @@ div.child-home-meet-the-pastor h2 {
     color: #61bf4c;
 }
 
-/**************
+/****************************
  * About: Leadership Team page
- **************/
+ ****************************/
 /* Space the leader's name, title, phone, etc. */
 .child-leadership-page-leader-details {
     text-align: left;
@@ -474,18 +476,18 @@ div.child-home-meet-the-pastor h2 {
     margin: 0.3em 0;
 }
 
-/**************
+/****************************
  * About: Service Times page
- **************/
+ ****************************/
 /* Style Sidebar: Our Location */
 .child-service-times-page-main-content table td {
     text-align: left;
     padding: 0 5px 0 0;
 }
 
-/**************
+/****************************
  * Events page
- **************/
+ ****************************/
 /*
  * EventON Plugin
  */
@@ -526,69 +528,51 @@ div.child-home-meet-the-pastor h2 {
     padding-top: 5px;
 }
 
-/**************
- * Sermons: Portfolio list page
- **************/
-/* Portfolio list */
-.projects_holder_outer .filter_outer {
-    margin-bottom: 25px;
-}
-.projects_holder_outer ul li span {
-    font-size: 16px;
-}
-.projects_holder article .portfolio_description {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-}
-.projects_holder article .portfolio_description .portfolio_title {
-    margin: 0 !important;
-}
-.projects_holder article .published_date,
-.projects_holder article .portfolio_excerpt {
-    line-height: 22px;
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: #464646;
-}
-.projects_holder article .published_date {
-    text-align: center;
-}
-.projects_holder article .portfolio_excerpt {
-    text-align: left;
-}
-
-/**************
- * Sermons: Individual portfolio page
- **************/
-.child-message-row-content .child-message-date {
-    line-height: 21px;
-}
-.child-message-row-content p.child-message-description,
-.child-message-row-content p.child-message-description:last-child {
-    margin: 10px 0;
-}
-
-/**************
+/****************************
  * News: Listing page
- **************/
+ ****************************/
 /* Remove the white background behind blog text  */
 .blog_holder article .post_text .post_text_inner {
     background-color: transparent !important;
 }
 /* Remove the spacing above the article heading */
-.blog .blog_holder.blog_small_image article .post_text .post_text_inner {
+.blog .blog_holder.blog_small_image article .post_text .post_text_inner,
+.blog_holder.blog_small_image article .post_text .post_text_inner {
     padding-top: 0 !important;
 }
-/* Remove default vertical spacing between article title, date, and excerpt */
+
+/* Blog view: Remove default vertical spacing between article title, date, and excerpt */
 .blog .blog_holder.blog_small_image article .post_text .post_text_inner h2,
 .blog .blog_holder.blog_small_image article .post_text .post_text_inner .post_info {
     margin: 0;
 }
+/* Category view: Remove default vertical spacing between article title, date, and excerpt */
+.category .blog_holder.blog_small_image h2,
+.category .blog_holder article .post_info {
+    margin: 0;
+}
+/* Author view: Remove default vertical spacing between article title, date, and excerpt */
+.author .blog_holder.blog_small_image h2,
+.author .blog_holder article .post_info {
+    margin: 0;
+}
 
-/**************
+/* Blog view: Add some vertical spacing below article image */
+.blog .blog_holder.blog_small_image article .post_image {
+    margin: 0 0 0.6em;
+}
+/* Category view: Add some vertical spacing below article image */
+.category .blog_holder.blog_small_image article .post_image {
+    margin: 0 0 0.6em;
+}
+/* Category view: Add some vertical spacing below article image */
+.author .blog_holder.blog_small_image article .post_image {
+    margin: 0 0 0.6em;
+}
+
+/****************************
  * News: Single page
- **************/
+ ****************************/
 /* Remove the Title from the top of the page. It's possible to disable this on a
    page-per-page basis, but let's not make the administrator do this. */
 .single-post .title_outer {
@@ -627,9 +611,9 @@ div.child-home-meet-the-pastor h2 {
     margin-top: 95px !important;
 }
 
-/**************
+/****************************
  * Contact page
- **************/
+ ****************************/
 /* Table styling */
 .child-contact-page table td {
     text-align: left;
@@ -658,9 +642,9 @@ div.child-home-meet-the-pastor h2 {
     margin-bottom: 0;
 }
 
-/**************
+/****************************
  * Giving page
- **************/
+ ****************************/
 /* Giving Options boxes: Left align the image and title */
 .q_icon_with_title.small .icon_holder {
     padding: 0 5px 0 0 !important;
@@ -686,9 +670,9 @@ div.child-home-meet-the-pastor h2 {
     line-height: 30px;
 }
 
-/**************
+/****************************
  * Minstries -> Missionary and Community Outreach Partners page
- **************/
+ ****************************/
 /* Style separator line */
 .child-text-separator {
     border-top-color: #61bf4c !important;
@@ -701,9 +685,9 @@ div.child-home-meet-the-pastor h2 {
 }
 
 
-/**************
+/****************************
  * Privacy Policy page
- **************/
+ ****************************/
 /* Contact information */
 .child-sidebar-contact table td {
     text-align: left;
@@ -713,9 +697,9 @@ div.child-home-meet-the-pastor h2 {
     margin-top: 5px;
 }
 
-/**************
+/****************************
  * 404 Error page
- **************/
+ ****************************/
 body.error404 .title {
     height: 175px !important;
 }
@@ -743,9 +727,9 @@ body.error404 .title_subtitle_holder {
 
 @media only screen and (min-width: 900px) {
 
-    /**************
+    /****************************
      * Events page
-     **************/
+     ****************************/
     /* Show more of the thumbnail images in the event listings */
     .child-events-listing-wide-image .ajde_evcal_calendar .eventon_events_list .eventon_list_event .ev_ftImg {
         height: 85px;
@@ -773,9 +757,9 @@ body.error404 .title_subtitle_holder {
         min-height: inherit !important;
     }
 
-    /**************
+    /****************************
      * About: Leadership Team page
-     **************/
+     ****************************/
     /* Space the leader's name, title, phone, etc. */
     .child-leadership-page-leader-details {
         text-align: center;

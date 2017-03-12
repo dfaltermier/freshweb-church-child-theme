@@ -1,5 +1,7 @@
 /*
- * Stylesheet for Sermons.
+ * Sermons Stylesheet
+ *
+ * Note: Prefix all styles with 'fw-child-' so we don't override any parent styles accidentally.
  */
 
 /*******************************
