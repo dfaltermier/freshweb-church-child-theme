@@ -1,5 +1,6 @@
 /*
 Theme Name:   Bridge Child
+Theme URI:    https://github.com/dfaltermier/freshweb-church-child-theme
 Description:  This is your church website theme. It is a child theme of the parent Bridge theme. Theme modifications should be done here instead of the parent theme directly.
 Version:      1.1.3
 Author:       FreshWeb Studio
@@ -11,5 +12,6 @@ Template:     bridge
 */
 
 /*
- * See ./css/main.css for our priimary stylesheet.
+ * CSS changes can be made in files in the /css folder. This is a placeholder file
+ * required by WordPress, so do not delete it.
  */
