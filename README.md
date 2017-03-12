@@ -11,6 +11,15 @@ This theme must be installed as a child theme to the [Bridge WordPress parent th
 
 This theme requires the [FreshWeb Sermons plugin](https://github.com/dfaltermier/freshweb-sermons). This plugin provides the means by which sermons (custom post type) are created and managed on the WordPress backend. Our child theme displays these sermons. You can see the sermons implementated from the 'Sermons' menu option on the [church demo website](http://church.freshwebstudio.com/sermons).
 
-## Screenshot(s)
+## Installation
+
+When installing this child theme in the WordPress /themes folder, name the child theme root folder 'bridge-child'. Using Git, it should look something like this:
+
+$ cd <WordPress themes folder>
+$ git clone https://github.com/dfaltermier/freshweb-church-child-theme.git bridge-child
+
+## Screenshots
 
 ![home-page-min](https://cloud.githubusercontent.com/assets/3323104/23837081/2f53fe14-0748-11e7-8a0e-ea16a34531f7.jpg)
+
+![theme-page-min](https://cloud.githubusercontent.com/assets/3323104/23837366/97a52642-074c-11e7-8350-17df0b91146d.jpg)
