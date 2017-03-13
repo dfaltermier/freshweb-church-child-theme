@@ -15,8 +15,10 @@ This theme requires the [FreshWeb Sermons plugin](https://github.com/dfaltermier
 
 When installing this child theme in the WordPress /themes folder, name the child theme root folder 'bridge-child'. Using Git, it should look something like this:
 
+```
 $ cd <WordPress themes folder>
 $ git clone https://github.com/dfaltermier/freshweb-church-child-theme.git bridge-child
+```
 
 ## Screenshots
 
