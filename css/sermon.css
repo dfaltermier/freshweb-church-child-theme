@@ -615,6 +615,45 @@
 }
 
 /*
+ * List all sermons in this series
+ */
+.fw-child-single-sermon .fw-child-single-sermon-series {
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #f0f3eb;
+    border: 2px solid #61bf4c;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series_separator {
+    border: 2px solid #8cd756;
+    border-radius: 2px;
+    margin: 1em auto;
+    max-width: 305px;
+    width: 40%;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series-entry {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    vertical-align: top;
+    width: 24.99%;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series-entry-title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4em;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series-entry-title a {
+    color: #61bf4c;
+}
+
+/*
  * Previous and Next sermons (pagination)
  */
 .fw-child-single-sermon-pagination {
@@ -749,6 +788,13 @@
         width: 33.3%;
     }
 
+    /*******************************
+     * Single Sermon page
+     ******************************/
+    .fw-child-single-sermon .fw-child-single-sermon-series-entry {
+        width: 33.3%;
+    }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -810,6 +856,10 @@
         width: 100%;
     }
 
+    .fw-child-single-sermon .fw-child-single-sermon-series-entry {
+        width: 49.5%;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -842,4 +892,12 @@
     .fw-child-sermon-archives .fw-child-sermon-archives-entry {
         width: 100%;
     }
+
+    /*******************************
+     * Single Sermon page
+     ******************************/
+    .fw-child-single-sermon .fw-child-single-sermon-series-entry {
+        width: 100%;
+    }
+
 }

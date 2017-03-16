@@ -228,6 +228,86 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
             <?php endif; ?>
 
+            <?php
+                /*
+                 * Report all of the sermons in our current series.
+                 * Although WP will allow the assignment of more than one sermon
+                 * series for a given sermon, we'll limit ourselves to only the first
+                 * series retrieved. This should reflect normal life.
+                 */
+                $sermons_in_series_counter = 0;
+                $sermons_in_series = array();
+                $taxonomy = 'sermon_series';
+                $series_terms = get_the_terms( get_the_ID(), $taxonomy );
+
+                if ( ! empty( $series_terms ) ) {
+
+                    $series_ids = array( $series_terms[0]->term_id );
+
+                    if ( ! empty( $series_ids ) ) {
+
+                        $sermons_in_series = get_posts( array(
+                            'post_type'      => 'sermon',
+                            'posts_per_page' => -1,
+                            'posts_status'   => 'publish',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'sermon_series',
+                                    'field'    => 'id',
+                                    'terms'    => $series_ids
+                                )
+                            )
+                        ) );
+                    }
+
+                }
+            ?>
+
+            <?php if ( ! empty( $sermons_in_series ) ) : ?>
+                <section class="fw-child-single-sermon-series">
+
+                    <h3 class="fw-child-single-sermon-series-title">Other Sermons in this Series</h3>
+
+                    <div class="fw-child-single-sermon-series_separator"></div>
+
+                    <ul class="fw-child-single-sermon-series_list">
+
+                        <?php foreach ( $sermons_in_series as $sermon_in_series ) : ?>
+
+                            <?php if ( ! empty( $sermon_in_series->post_title ) &&
+                                       ! empty( $sermon_in_series->post_date ) ) : ?>
+
+                                <?php
+                                // We must not leave any whitespace between the closing 'li' tag and the
+                                // beginning of the next in order for the page flow to work with the set widths.
+                                ?>
+                                <?php if ( $sermons_in_series_counter > 0 ) { echo '</li>'; } ?><li class="fw-child-single-sermon-series-entry">
+
+                                <div class="fw-child-single-sermon-series-entry-title">
+
+                                    <?php if ( $sermon_in_series->ID == get_the_ID() ) : ?>
+                                        <?php echo esc_html( get_the_title( $sermon_in_series->ID ) ); ?>
+                                    <?php else : ?>
+                                        <a href="<?php echo esc_url( get_permalink( $sermon_in_series->ID ) ); ?>">
+                                        <?php echo esc_html( get_the_title( $sermon_in_series->ID ) ); ?></a>
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <div class="fw-child-single-sermon-series-entry-date">
+                                    <?php echo esc_html( get_the_date( $date_format, $sermon_in_series->ID ) ); ?>
+                                </div>
+
+                            <?php endif; ?>
+
+                        <?php endforeach; ?>
+
+                        </li>
+                    </ul>
+                </section>
+
+            <?php endif; ?>
+
         </article>
 
         <?php if ( ! empty( $prev_sermon_post ) || ! empty( $next_sermon_post ) ) : ?>
