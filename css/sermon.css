@@ -640,6 +640,7 @@
     box-sizing: border-box;
     display: inline-block;
     padding: 10px 20px;
+    position: relative;
     text-align: center;
     vertical-align: top;
     width: 24.99%;
@@ -651,6 +652,10 @@
 }
 .fw-child-single-sermon .fw-child-single-sermon-series-entry-title a {
     color: #61bf4c;
+}
+.fw-child-single-sermon .fw-child-single-sermon-series-entry-you-are-here-icon img {
+    height: 38px;
+    width: 94px;
 }
 
 /*

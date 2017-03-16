@@ -295,8 +295,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                                 </div>
 
                                 <div class="fw-child-single-sermon-series-entry-date">
+
                                     <?php echo esc_html( get_the_date( $date_format, $sermon_in_series->ID ) ); ?>
+
                                 </div>
+
+                                <?php if ( $sermon_in_series->ID == get_the_ID() ) : ?>
+
+                                    <div class="fw-child-single-sermon-series-entry-you-are-here-icon">
+                                        <img src="<?php echo FW_CHILD_THEME_IMAGE_URI . '/you-are-here-icon-under.200x81-min.png'; ?>"
+                                             alt="You are here" />
+                                    </div>
+
+                                <?php endif; ?>
 
                             <?php endif; ?>
 
