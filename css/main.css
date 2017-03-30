@@ -55,6 +55,11 @@ h6:last-child {
     margin-left: 1.3em;
 }
 
+.child-float-right-50 {
+    float: right;
+    width: 50%;
+}
+
 /************************************************
  * Global plugin styling
  ************************************************/
@@ -419,6 +424,37 @@ div.child-home-meet-the-pastor h2 {
     margin: 0.1em;
 } 
 
+/* 
+ * For those sites where the Pastor's instroduction text needs to be in white,
+ * add this selector to the pastor text.
+ */
+div.child-home-meet-the-pastor-text {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border: none;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+div.child-home-meet-the-pastor-text * {
+    color: #fff;
+}
+div.child-home-meet-the-pastor-text h2 {
+    margin: 0;
+}
+div.child-home-meet-the-pastor-text p {
+    font-weight: 600;
+}
+
 /****************************
  * Event section
  * EventOn Plugin: Event Listings Addon
@@ -746,7 +782,7 @@ body.error404 .title_subtitle_holder {
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .sin_val.hasFtIMG .evcal_desc,
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .hasFtIMG .evcal_desc,
     .child-events-listing-wide-image .ajde_evcal_calendar #evcal_list .eventon_list_event .evo_pop_body .hasFtIMG .evcal_desc {
-        padding-left: 290px;
+        padding-left: 300px;
     }
 
 }
@@ -763,6 +799,13 @@ body.error404 .title_subtitle_holder {
     /* Space the leader's name, title, phone, etc. */
     .child-leadership-page-leader-details {
         text-align: center;
+    }
+
+    /* Images and what-not that are floated right at 50% will now
+       display full-width */
+    .child-float-right-50 {
+        float: none;
+        width: 100%;
     }
     
 }
