@@ -31,9 +31,9 @@ $selected_year = ! empty( $selected_year ) ? $selected_year : date( 'Y' );
  * Get the list of years for ALL sermons. We'll use this list for our navigation.
  *
  * Returns string:
- *    <li><a href="http://church.freshwebstudio.com/sermons/dates?sermon_year=2016" 
+ *    <li><a href="http://<domain-name>/sermons/dates?sermon_year=2016" 
  *           class="fw-child-sermon-year-active">2016</a></li>
- *    <li><a href="http://church.freshwebstudio.com/sermons/dates?sermon_year=2017" 
+ *    <li><a href="http://<domain-name>/sermons/dates?sermon_year=2017" 
  *           class="">2017</a></li>
  */
 $year_navigation = FW_Child_Sermon_Functions::get_sermon_year_navigation( $selected_year );

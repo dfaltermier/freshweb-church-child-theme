@@ -241,7 +241,7 @@ class FW_Child_Sermon_Functions {
                     [post_modified_gmt] => 2016-10-30 20:33:10
                     [post_content_filtered] => 
                     [post_parent] => 0
-                    [guid] => http://church.freshwebstudio.com/?post_type=sermon&p=1156
+                    [guid] => http://<domain-name>/?post_type=sermon&p=1156
                     [menu_order] => 0
                     [post_type] => sermon
                     [post_mime_type] => 
