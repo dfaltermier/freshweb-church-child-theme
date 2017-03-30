@@ -550,7 +550,7 @@ class FW_Child_Sermon_Functions {
                 'book_terms' => array()
             ),
             array(
-                'title'      => 'Books',
+                'title'      => 'Other Resources',
                 'book_terms' => array()
             )
         );
