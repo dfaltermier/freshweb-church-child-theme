@@ -198,7 +198,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             <?php endif; ?>
 
             <div class="fw-child-single-sermon-title">
-                <h2><?php echo htmlentities( get_the_title() ); ?></h2>
+                <h2><?php echo get_the_title(); ?></h2>
             </div>
 
             <div class="fw-child-single-sermon-copy">
