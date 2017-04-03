@@ -21,11 +21,12 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
- * Look into the url query for a year string. If given, then display the sermons
- * for only this year. Otherwise, use the current year from today's date.
+ * Get the four-digit year according to (in order):
+ * 1. The 'sermon_year' query parament value from the current page url, or
+ * 2. The year of our most recent published sermon, or
+ * 3. The current year.
  */
-$selected_year = FW_Child_Sermon_Functions::get_url_sermon_year();
-$selected_year = ! empty( $selected_year ) ? $selected_year : date( 'Y' );
+$selected_year = FW_Child_Sermon_Functions::get_sermon_year();
 
 /*
  * Get the list of years for ALL sermons. We'll use this list for our navigation.

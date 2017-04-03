@@ -662,6 +662,46 @@ class FW_Child_Sermon_Functions {
 
     }
 
+    /** 
+     * Returns a four-digit year according to the following (in order):
+     * 1. The 'sermon_year' query parament value from the current page url, or
+     * 2. The year of our most recent published sermon, or
+     * 3. The current year.
+     *
+     * Use:
+     * You'll call this method to retrieve the year before calling:
+     *     self::get_sermon_year_navigation( $year )
+     *     self::get_sermons_by_date( $year )
+     *
+     * @since  1.1.0
+     * @global $wpdb
+     *
+     * @return string  Four-digit year.
+     */
+    public static function get_sermon_year() {
+    
+        global $wpdb;
+
+        $year = self::get_url_sermon_year();
+
+        if ( empty( $year ) ) {
+
+            $years = $wpdb->get_col(
+                "SELECT DISTINCT YEAR(post_date) " .
+                "FROM $wpdb->posts " .
+                "WHERE post_status = 'publish' AND post_type = 'sermon' " .
+                "ORDER BY post_date " .
+                "DESC"
+            );
+
+            $year = ! empty( $years ) ? array_shift( $years ) : date( 'Y' );
+
+        }
+
+        return $year;
+
+    }
+
     /**
      * Filter callback used to modify the SELECT portion of the sql query for get_sermons_by_date().
      *
@@ -702,13 +742,10 @@ class FW_Child_Sermon_Functions {
      *
      * @since  1.1.0
      *
-     * @param  string    $year   Optional. e.g.: '2017'. Default: current year.
-     * @return array             Sermons
+     * @param  string  $year   Four-digit year (e.g.: '2017')
+     * @return array           Sermons
      */
-    public static function get_sermons_by_date( $year = '' ) {
-
-        // Use the current year by default.
-        $year = empty( $year ) ? date( 'Y' ) : $year; 
+    public static function get_sermons_by_date( $year ) {
 
         // Map our months to a list of sermons associated for that month.
         $months = array();
@@ -933,7 +970,13 @@ class FW_Child_Sermon_Functions {
         global $wpdb;
         $list = array();
  
-        $years = $wpdb->get_col( "SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'sermon' ORDER BY post_date ASC" );
+        $years = $wpdb->get_col(
+            "SELECT DISTINCT YEAR(post_date) " .
+            "FROM $wpdb->posts " .
+            "WHERE post_status = 'publish' AND post_type = 'sermon' " .
+            "ORDER BY post_date " .
+            "ASC"
+        );
 
         foreach ( $years as $year ) {
 
