@@ -264,8 +264,11 @@
 /*******************************
  * Sermon Series Listings
  ******************************/
-.fw-child-sermon-series-preamble p {
-    margin: 0 0 2em;
+.fw-child-sermon-series-preamble {
+    margin-bottom: 3em;
+}
+.fw-child-sermon-series-preamble p:first-child {
+    margin-top: 0;
 }
 .fw-child-sermon-series-entry {
     background-color: #fff;
