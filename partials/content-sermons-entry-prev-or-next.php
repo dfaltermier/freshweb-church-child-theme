@@ -33,7 +33,10 @@ $topics   = get_the_term_list( $sermon_post->ID, 'sermon_topic',   '', ', ' );
 $series   = get_the_term_list( $sermon_post->ID, 'sermon_series',  '', ', ' );
 $books    = get_the_term_list( $sermon_post->ID, 'sermon_book',    '', ', ' );
 
-$excerpt = $sermon_post->post_excerpt;
+$excerpt = ! empty( $sermon_post->post_excerpt )
+           ? $sermon_post->post_excerpt
+           : $sermon_post->post_content;
+
 $excerpt = FW_Child_Common_Functions::get_the_excerpt( $excerpt );
 
 $date_format = get_option( 'date_format' );
