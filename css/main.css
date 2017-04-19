@@ -135,15 +135,22 @@ h6:last-child {
 }
 form input[type="text"],
 form input[type="email"],
+form input[type="tel"],
 form textarea,
 form select {
     border: 1px solid #999 !important;
     font-size: 14px !important;
     color: #464646 !important;
 }
+
+body .gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]),
+body .gform_wrapper textarea {
+    padding: 10px;
+}
 body .gform_wrapper {
     max-width: 100%;
 }
+
 /* Remove the top spacing above the Submit button. */
 .gform_wrapper .gform_footer {
     margin-top: 0 !important;
@@ -154,6 +161,7 @@ body .gform_wrapper {
 body .gform_wrapper input[type="submit"] {
     color: #61bf4c !important;
     border: 1px solid #61bf4c !important;
+    width: initial !important;
 }
 body .gform_wrapper input[type="submit"]:hover {
     color: #fff !important;
@@ -190,6 +198,13 @@ body .gform_wrapper input[type="submit"]:hover {
 .su-spoiler.child-spoiler .su-spoiler-content {
     background-color: #f7f7f7;
     padding: 1em;
+}
+
+/*
+ * Bulleted Lists
+ */
+.su-list {
+    margin-left: 2em;
 }
 
 /****************************
@@ -357,15 +372,6 @@ nav.mobile_menu ul li.has_sub h3 {
 .footer_top_holder .footer_top .child-footer-contact-form .gfield_label {
     display: none;
 }
-/* Make the input fields smaller to fit the footer */
-.footer_top_holder .footer_top .child-footer-contact-form input[type="text"],
-.footer_top_holder .footer_top .child-footer-contact-form textarea {
-    padding: 5px;
-    color: #464646;
-    background-color: #f7f7f7;
-    font-weight: 600;
-    font-size: 14px;
-}
 /* Our textarea is too tall */
 .footer_top_holder .footer_top .child-footer-contact-form textarea.large {
     height: 8em;
@@ -382,17 +388,17 @@ nav.mobile_menu ul li.has_sub h3 {
 /*
  * Top Footer Widget 3: Service Times
  */
-.footer_top_holder .footer_top .child-footer-service-times table td {
-    text-align: left;
-    padding: 0 5px 0 0;
-}
-/* Let's pack-in everything tight for sake of space. */
-.footer_top_holder .footer_top .child-footer-service-times p {
-    line-height: 20px;
-}
 /* Give the headings some space */
 .footer_top_holder .footer_top .child-footer-service-times h6 {
-    margin: 10px 0 3px;
+    margin: 10px 0;
+}
+.footer_top_holder .footer_top .child-footer-service-times table td {
+    text-align: left;
+    padding: 4px 5px 4px 0;
+    width: 40%;
+}
+.footer_top_holder .footer_top .child-footer-service-times table td:first-child {
+    width: 60%;
 }
 
 /*
@@ -453,6 +459,14 @@ div.child-home-meet-the-pastor-text h2 {
 }
 div.child-home-meet-the-pastor-text p {
     font-weight: 600;
+}
+
+/****************************
+ * Event section
+ * EventOn Plugin
+ ****************************/
+.eventon_events_list .eventon_list_event a {
+    color: #61bf4c;
 }
 
 /****************************

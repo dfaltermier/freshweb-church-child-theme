@@ -45,6 +45,16 @@ class FW_Child_Front_Functions {
         // Add our scripts and stylesheets as long as we're not on the login page.
         if ( ! in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) ) ) {
 
+            /* 
+             * Manually load the gravity forms stylesheet(s) so that they are inserted into
+             * the page head and not the page body.
+             * See: https://snippets.webaware.com.au/snippets/load-gravity-forms-stylesheets-in-page-head/
+             */ 
+            if ( function_exists( 'gravity_form_enqueue_scripts' ) ) {
+                gravity_form_enqueue_scripts( 1 ); // Contact page form
+                gravity_form_enqueue_scripts( 2 ); // Contact widget footer form
+            }
+
             wp_enqueue_style(
                 'fw-child-theme-stylesheet', 
                 FW_CHILD_THEME_CSS_URI . '/main.css', 
