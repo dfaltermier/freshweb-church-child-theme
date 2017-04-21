@@ -38,6 +38,9 @@ $speaker_term_counter = 0;
                             array( 'class' => 'fw-child-sermon-speaker-entry-image' ) 
                         );
                     }
+                    else {
+                        $image_html = '';
+                    }
                 ?>
 
                 <?php
