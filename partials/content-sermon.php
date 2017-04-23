@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     <?php while (have_posts()) : the_post(); ?>
 
         <?php
+        
         $custom_sermon_meta_data = FW_Child_Sermon_Functions::get_custom_sermon_meta_data();
 
         // Determine the page we should display based on the query string contents (e.g.: player=video)

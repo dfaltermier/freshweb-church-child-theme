@@ -20,7 +20,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
- * Note: The variable $sermon_post is inherited by our calling file.
+ * Note: The variable $sermon_post is inherited from our calling file.
  */
 
 $thumbnail_image = get_the_post_thumbnail( $sermon_post->ID );
@@ -33,11 +33,15 @@ $topics   = get_the_term_list( $sermon_post->ID, 'sermon_topic',   '', ', ' );
 $series   = get_the_term_list( $sermon_post->ID, 'sermon_series',  '', ', ' );
 $books    = get_the_term_list( $sermon_post->ID, 'sermon_book',    '', ', ' );
 
-$excerpt = ! empty( $sermon_post->post_excerpt )
-           ? $sermon_post->post_excerpt
-           : $sermon_post->post_content;
-
-$excerpt = FW_Child_Common_Functions::get_the_excerpt( $excerpt );
+/* 
+ * Create an excerpt from the $sermon_post. We can't do this:
+ *    $excerpt = get_the_excerpt( $sermon_post->ID );
+ * because of a WP bug which will be fixed in WP v4.8.
+ * (https://core.trac.wordpress.org/ticket/36934)
+ */
+$excerpt = ( ! empty( $sermon_post->post_excerpt ) )
+    ? FW_Child_Common_Functions::create_an_excerpt( $sermon_post->post_excerpt, false )
+    : FW_Child_Common_Functions::create_an_excerpt( $sermon_post->post_content );
 
 $date_format = get_option( 'date_format' );
 $date_string = date( $date_format, strtotime( $sermon_post->post_date ) );

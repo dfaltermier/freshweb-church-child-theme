@@ -46,7 +46,7 @@ class FW_Child_Common_Functions {
      * @since  1.1.0
      * @return int   Number of words.
      */
-    public function set_excerpt_length( $length ) {
+    public function set_excerpt_length() {
 
         return self::SERMON_EXCERPT_LENGTH;
 
@@ -150,17 +150,22 @@ class FW_Child_Common_Functions {
     }
 
     /**
-     * Returns the given excerpt cleaned and sanitized.
+     * Create an excerpt from the given content.
      *
-     * @since  1.1.0
-     * @param  string  $excerpt  Optional. Post or page excerpt. Default: current post excerpt.
-     * @return string            Sanitized excerpt.
+     * @since  1.1.4
+     * @param  string  $content      Source text.
+     * @param  bool    $do_truncate  Truncate SERMON_EXCERPT_LENGTH words. Default: true.
+     * @return string            Created excerpt.
      */
-    public static function get_the_excerpt( $excerpt = null ) {
+    public static function create_an_excerpt( $content, $do_truncate = true ) {
 
-        $excerpt = isset( $excerpt ) ? $excerpt : get_the_excerpt();
-        $excerpt = wp_strip_all_tags( $excerpt );
+        $excerpt = wp_strip_all_tags( $content );
         $excerpt = wptexturize( $excerpt );
+
+        if ( $do_truncate ) {
+            $excerpt = wp_trim_words( $excerpt, self::SERMON_EXCERPT_LENGTH );
+        }
+
         return $excerpt;
 
     }

@@ -21,7 +21,7 @@ $topics   = get_the_term_list( $post->ID, 'sermon_topic',   '', ', ' );
 $series   = get_the_term_list( $post->ID, 'sermon_series',  '', ', ' );
 $books    = get_the_term_list( $post->ID, 'sermon_book',    '', ', ' );
 
-$excerpt = FW_Child_Common_Functions::get_the_excerpt();
+$excerpt = get_the_excerpt();
 
 $date_format = get_option( 'date_format' );
 $date_string = get_the_date( $date_format );

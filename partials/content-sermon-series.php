@@ -19,8 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 $sermon_series_data = FW_Child_Sermon_Functions::get_sermon_series_with_pagination();
 
 $sermon_series_objects = array_values( $sermon_series_data['series'] );
-$pagination = $sermon_series_data['pagination'];
-
+$pagination  = $sermon_series_data['pagination'];
 $date_format = get_option( 'date_format' );
 
 ?>
@@ -72,9 +71,7 @@ $date_format = get_option( 'date_format' );
                     <?php if ( isset( $sermon_series_object->description ) ) : ?>
 
                         <?php
-                            $excerpt = $sermon_series_object->description;
-                            $excerpt = FW_Child_Common_Functions::get_the_excerpt( $excerpt );
-                            $excerpt = wp_trim_words( $excerpt, FW_Child_Common_Functions::SERMON_EXCERPT_LENGTH );
+                            $excerpt = FW_Child_Common_Functions::create_an_excerpt( $sermon_series_object->description );
                         ?>
 
                         <div class="fw-child-sermon-series-entry-excerpt"><?php echo $excerpt; ?></div>
