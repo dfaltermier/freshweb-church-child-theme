@@ -123,7 +123,7 @@ $sermon_counter = 0;
 
     <?php else: ?>
 
-        <div class="fw-child-sermons-none">There are no sermon archives to display for <?php echo esc_html( $selected_year ); ?></div>
+        <div class="fw-child-sermons-none">There are no sermon archives to display.</div>
 
     <?php endif; ?>
 
