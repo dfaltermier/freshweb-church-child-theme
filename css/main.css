@@ -55,9 +55,38 @@ h6:last-child {
     margin-left: 1.3em;
 }
 
+/* Deprecate this combined style and use the individucal styles below instead */
 .child-float-right-50 {
     float: right;
     width: 50%;
+}
+
+.child-float-left {
+    float: left;
+}
+.child-float-right {
+    float: right;
+}
+.child-width-half {
+    max-width: 100%;
+    width: 50%;
+}
+.child-margin-bottom-medium {
+    margin-bottom: 1em;
+}
+
+.child-columns-two {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 2em;
+    -moz-column-gap: 2em;
+    column-gap: 2em;
+}
+.child-columns-break-avoid {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 /************************************************
@@ -171,6 +200,9 @@ body .gform_wrapper input[type="submit"]:hover {
 
 /****************************
  * Plugin: Shortcodes Ultimate
+ * Note: This plugin places its stylsheet at the end of the html body. Therefore,
+ * we'll have to be more specific with our rules in order to override them from
+ * our stylesheet in the head.
  ****************************/
 /*
  * Accordion Effect for All Pages
@@ -203,8 +235,11 @@ body .gform_wrapper input[type="submit"]:hover {
 /*
  * Bulleted Lists
  */
-.su-list {
+div.su-list {
     margin-left: 2em;
+}
+div.su-list ul li {
+    line-height: 1.85em;
 }
 
 /****************************
@@ -822,5 +857,29 @@ body.error404 .title_subtitle_holder {
         width: 100%;
     }
     
+    .child-float-left {
+        float: none;
+    }
+    .child-float-right {
+        float: none;
+    }
+    .child-width-half {
+        max-width: 100%;
+        width: 100%;
+    }
+    .child-width-half.alignleft {
+        float: none;
+        margin-right: 0;
+    }
+    .child-width-half.alignright {
+        float: none;
+        margin-left: 0;
+    }
+    .child-columns-two {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+
 }
 
