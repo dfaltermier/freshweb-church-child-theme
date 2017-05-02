@@ -21,7 +21,8 @@ jQuery( function( $ ) {
 
     customSelectorList = [
         "object",
-        "embed"
+        "embed",
+        "iframe[src^='//bbemaildelivery.com']" // Bombbomb.com videos
     ];
 
     customSelectorString = customSelectorList.join(', ');
